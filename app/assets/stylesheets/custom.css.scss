@@ -1,0 +1,27 @@
+.be-classical {
+  color: #a09393;
+}
+
+#upload_btn {
+	display: none;
+}
+
+.cover-photo img{ width: 500px; }
+
+@media screen and (max-width:767px) {
+	.cover-photo img{ width: 100%; }
+}
+#error_explanation {
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 0;
+    }
+  }
+}
+
+.footer-margin {
+	margin-top: 52%;
+}

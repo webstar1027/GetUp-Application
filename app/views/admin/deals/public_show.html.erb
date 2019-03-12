@@ -1,0 +1,56 @@
+  <div class="main">
+    <div class="cd-section" id="headers">
+      <!--     *********     HEADER 2      *********      -->
+      <div class="header-2">
+        <div class="page-header header-filter" style="background-image: url('./assets/img/examples/Slider-BG-1.jpg');">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 ml-auto mr-auto text-center">
+                <h1 class="title"> Active Deals</h1>
+                <h4>Our Deals List</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--     *********    END HEADER 2      *********      -->
+    </div>
+    <!--     *********    PROJECTS 2     *********      -->
+    <div class="projects-2" id="projects-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto text-center">
+            <h6 class="text-muted">Deals</h6>
+            <h2 class="title">Our Awesome Deals</h2>
+            <h5 class="description">Description for deals</h5>
+            <div class="section-space"></div>
+          </div>
+        </div>
+        <div class="row">
+          <% @deals.each do |deal| %>
+          <div class="col-md-4">
+            <div class="card card-plain">
+                <div class="card-header card-header-image">
+                  <% if deal.cover_photo.attached? %>
+                  <%= image_tag deal.cover_photo %>
+                  <% else %>
+                  <img class="img" src="../assets/img/card-2.jpg">
+                  <% end %>
+                </div>
+                <div class="card-body ">
+                  <h4 class="card-title"><%= deal.name %></h4>
+                  <h6 class="card-category"><%= deal.user.username %></h6>
+                  <h6 class="card-category"><%= deal.coupon_left %> Left Expires in <%= deal.days_left %> Days</h6>
+                <p class="card-description">
+                   <%= deal.description %>
+                </p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+    <!--     *********    END PROJECTS 2      *********      -->
+  </div>

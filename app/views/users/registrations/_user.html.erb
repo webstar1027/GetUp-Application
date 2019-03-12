@@ -1,0 +1,121 @@
+<div class="page-header header-filter" style="background-image: url('../assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Register for User Account</h2>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <div class="icon icon-rose">
+                      <i class="material-icons">explore</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Explore</h4>
+                      <p class="description">
+                        Find special deals located in Places of interest.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">loyalty</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Deals</h4>
+                      <p class="description">
+                        Collect deals to get discounts off your next meal or shopping.  
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-info">
+                      <i class="material-icons">contact_support</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">How</h4>
+                      <p class="description">
+                        Signup for GET UP! user account. Download the mobile app. Travel to specific Place of Interest, check-in and grab the deals! Its that simple.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <div class="social text-center">
+                    <div class="social text-center">
+                    <%= link_to user_twitter_omniauth_authorize_path, class: "btn btn-just-icon btn-round btn-twitter" do %>
+                      <i class="fa fa-twitter"> </i>
+                    <% end %>
+                    <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-just-icon btn-round btn-google" do %>
+                      <i class="fa fa-google"> </i>
+                    <% end %>
+                    <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-just-icon btn-round btn-facebook" do %>
+                      <i class="fa fa-facebook"> </i>
+                    <% end %>
+                    <h4> or be classical </h4>
+                  </div>
+                  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
+                    <%= render "users/shared/error_messages", locals: {resource: resource}%>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">face</i>
+                          </span>
+                        </div>
+                        <%= f.text_field :username, class: "form-control", placeholder: "username" %>
+                        <%= f.hidden_field :role, class: "form-control", value: "user" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">mail</i>
+                          </span>
+                        </div>
+                        <%= f.email_field :email, class: "form-control", placeholder: "Email Address" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">lock_outline</i>
+                          </span>
+                        </div>
+                        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">lock_outline</i>
+                          </span>
+                        </div>
+                        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                        I agree to the
+                        <a href="#something">terms and conditions</a>.
+                      </label>
+                    </div>
+                    <div class="text-center">
+                      <%= f.submit "Sign up", class: "btn btn-primary btn-round" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

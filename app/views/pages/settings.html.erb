@@ -1,0 +1,49 @@
+<div class="content">
+  <div class="container-fluid">
+    <%= form_with(model: current_user, local: true, url: user_registration_path) do |f| %>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">settings</i>
+            </div>
+            <h4 class="card-title">Settings -
+              <small class="category">Update Password</small>
+            </h4>
+          </div>
+          <div class="card-body">
+           
+							<div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">New Password</label>
+                    <%= f.password_field :password, class: 'form-control' %>
+                  </div>
+                </div>
+							</div>
+							<div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Confirm Password</label>
+                    <%= f.password_field :password_confirmation, class: 'form-control input-lg'%>
+                  </div>
+                </div>
+							</div>
+							<div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Old Password</label>
+                    <%= f.password_field :current_password, required: true, class: 'form-control'%>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-rose pull-right">Update Password</button>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+  <% content_for :body_class, "login-page sidebar-collapse" %>
+
+  <div class="page-header header-filter" style="background-image: url(<%= asset_path '/assets/img/bg7.jpg' %>); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form" }) do |f| %>
+            <div class="card card-login card-hidden">
+              <div class="card-header card-header-primary text-center">
+                <% if resource.errors.any? %>
+                    <% (resource.errors.messages || []).each do |error|  %>
+                        <li><%= "#{error.flatten.first}: #{error.flatten.last}" %></li>
+                    <% end %>
+                <% else %>
+                    <h4 class="card-title">Let's find your account</h4>
+                <% end %>
+              </div>
+              <div class="card-body ">
+                <span class="bmd-form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                      </span>
+                    </div>
+                    <%= f.email_field :email, class: "form-control", placeholder: "Email..." %>
+                  </div>
+                </span>
+              </div>
+              <div class="card-footer justify-content-center">
+                <%= f.submit "Lets Go", class: "btn btn-rose btn-link btn-lg" %>
+                <%= link_to "Cancel", new_user_session_path, class: "btn btn-rose btn-link btn-lg"%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+

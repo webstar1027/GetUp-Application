@@ -1,0 +1,135 @@
+
+<style>
+  td.details-control {
+      background: url('https://cdn.rawgit.com/DataTables/DataTables/6c7ada53ebc228ea9bc28b1b216e793b1825d188/examples/resources/details_open.png') no-repeat center center;
+      cursor: pointer;
+  }
+  tr.shown td.details-control {
+      background: url('https://cdn.rawgit.com/DataTables/DataTables/6c7ada53ebc228ea9bc28b1b216e793b1825d188/examples/resources/details_close.png') no-repeat center center;
+  }
+  </style>
+<% content_for :breadcrumb do %>
+  List of POIs
+<% end %>
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">place</i>
+        </div>
+        <h4 class="card-title">POIs</h4>
+      </div>
+      <div class="card-body">
+        <div class="toolbar">
+          <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <td colspan="6"></td>
+                <td colspan="2" class="text-right">
+                  <%= link_to new_pois_path do %>
+                  <button type="button" class="btn btn-info btn-round">Add new POI <i class="material-icons">add</i></button>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                <th>Cover Photo</th>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Popularity</th>
+                <th>City</th>
+                <th>Total no. visits</th>
+                <th>Deals available</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>
+                <th>Cover Photo</th>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Popularity</th>
+                <th>City</th>
+                <th>Total no. visits</th>
+                <th>Deals available</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+              
+            </tfoot>
+            <tbody>
+              <% @pois.each do |poi| %>
+                <tr>
+                  <td class="details-control">
+                  </td>
+                  <td>
+                    <% if poi.avatar.attached? %>
+                      <%= image_tag(poi.avatar, class: "list-image") %>
+                      <% else %>
+                      <%= image_tag("https://via.placeholder.com/300x200", class: "list-image") %>
+                    <% end %>
+                  </td>
+                  <td><%= poi.title %></td>
+                  <td><%= poi.coordinate %></td>
+                  <td><%= poi.popular %></td>
+                  <td><%= poi.city %></td>
+                  <td>#ToDo Total no. visits</td>
+                  <td>#ToDo Deals available</td>
+                  <td class="text-right">
+                    <%= link_to poi, class: "btn btn-link btn-info btn-just-icon like" do %>
+                      <i class="material-icons">pageview</i>
+                    <% end %>
+                    <%= link_to edit_pois_path(poi), class: "btn btn-link btn-warning btn-just-icon edit" do %>
+                      <i class="material-icons">dvr</i>
+                    <% end %>
+                    <%= link_to poi, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-danger btn-just-icon remove" do %>
+                      <i class="material-icons">close</i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              
+            </tbody>
+            
+          </table>
+        </div>
+      </div>
+      <div id="map-dashboard"></div>
+
+      <!-- end content-->
+    </div>
+    <!--  end card  -->
+  </div>
+  <!-- end col-md-12 -->
+</div>
+
+<script>
+  var locations=[];
+  $.each(addresses, function(index) { 
+    console.log( addresses[index] );
+    locations.push([addresses[index], coordinates[index][0],coordinates[index][1]]);  
+  });   
+
+  var map = new google.maps.Map(document.getElementById('map-dashboard'), {
+    zoom: 3,
+    center: new google.maps.LatLng(locations[0][1], locations[0][2]),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+
+  var marker, i;
+
+  for (i = 0; i < locations.length; i++) {  
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map
+    });
+  }
+</script>

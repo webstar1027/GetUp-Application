@@ -1,0 +1,222 @@
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="/assets/img/sidebar-1.jpg">
+      <div class="logo">
+        <%= link_to admin_root_path, class: "simple-text logo-mini" do %>
+          GU
+        <% end %>
+        <%= link_to admin_root_path, class: "simple-text logo-normal" do %>
+          Get Up!
+        <% end %>
+      </div>
+      <div class="sidebar-wrapper">
+        <div class="user">
+          <div class="photo">
+            <% if current_user.avatar.attached? %>
+              <div class="cover-photo">
+                <%= image_tag(current_user.avatar, class: "img", style: "width: 100px;") %>
+              </div>
+              <% else %>
+              <%= image_tag("https://via.placeholder.com/100x100", class: "img") %>
+            <% end %>
+          </div>
+          <div class="user-info">
+            <a data-toggle="collapse" href="#collapseExample" class="username">
+              <span>
+                <%= current_user.username %>
+                <b class="caret"></b>
+              </span>
+            </a>
+            <div class="collapse" id="collapseExample">
+              <ul class="nav">
+                <li class="nav-item">
+                  <% if current_user.business.present? %>
+                    <%= link_to "/business_profile/#{current_user.id}", class: "nav-link" do%>
+                      <span class="sidebar-mini"> MP </span>
+                      <span class="sidebar-normal"> My Profile </span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to profile_path, class: "nav-link" do%>
+                      <span class="sidebar-mini"> MP </span>
+                      <span class="sidebar-normal"> My Profile </span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to edit_profile_path, class: "nav-link" do%>
+                      <span class="sidebar-mini"> EP </span>
+                      <span class="sidebar-normal"> Edit Profile </span>
+                  <% end %>
+                </li>
+                <% if current_user.role == "business_owner" %>
+                  <li class="nav-item">
+                    <% if current_user.business.present? %>
+                      <%= link_to edit_business_path(current_user.business.id), class: "nav-link" do%>
+                        <span class="sidebar-mini"> BP </span>
+                        <span class="sidebar-normal"> Business Profile </span>
+                      <% end %>
+                    <% else %>
+                      <%= link_to new_business_path, class: "nav-link" do%>
+                        <span class="sidebar-mini"> BP </span>
+                        <span class="sidebar-normal"> Business Profile </span>
+                      <% end %>
+                    <% end %>
+                  </li>
+                <% end %>
+                <li class="nav-item">
+                  <%= link_to settings_path, class: "nav-link" do%>
+                    <span class="sidebar-mini"> S </span>
+                    <span class="sidebar-normal"> Settings </span>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ul class="nav">
+          <li class="nav-item active ">
+            <%= link_to admin_root_path, class: "nav-link" do %>
+              <i class="material-icons">dashboard</i>
+              <p> Dashboard </p>
+            <% end %>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
+              <i class="material-icons">place</i>
+              <p> POIs
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="pagesExamples">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to admin_pois_index_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_admin_pois_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
+              <i class="material-icons">book</i>
+              <p> Quests
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="componentsExamples">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to admin_quest_request_index_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> R </span>
+                    <span class="sidebar-normal"> Quest Requests </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to admin_quests_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_admin_quest_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+            
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#formsExamples">
+              <i class="material-icons">local_offer</i>
+              <p> Deals
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="formsExamples">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to requests_admin_deals_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> R </span>
+                    <span class="sidebar-normal"> Requests </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to admin_deals_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_admin_deal_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#users">
+              <i class="material-icons">nature_people</i>
+              <p> Users
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="users">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to admin_users_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_admin_user_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+            
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#businessOwners">
+              <i class="material-icons">business_centre</i>
+              <p> Business Owners
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="businessOwners">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to admin_business_owners_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_admin_business_owner_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>

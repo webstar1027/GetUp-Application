@@ -1,0 +1,141 @@
+<style>
+  .flipped {
+      -moz-transform: scale(-1, 1);
+      -webkit-transform: scale(-1, 1);
+      -o-transform: scale(-1, 1);
+      -ms-transform: scale(-1, 1);
+      transform: scale(-1, 1);
+  }
+  .disabled {
+        color: #b90000 !important;
+  }
+  
+  .enabled {
+    color: #19cc83 !important;
+  }
+  .fa {
+    font-size: 18px !important;
+  }
+  </style>
+
+
+<% content_for :breadcrumb do %>
+  List of Business Owners
+<% end %>
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">account_box</i>
+        </div>
+        <h4 class="card-title">Business Owners</h4>
+      </div>
+      <div class="card-body">
+        <div class="toolbar">
+          <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables table-responsive">
+          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <td colspan="6"></td>
+                <td colspan="2" class="text-right">
+                  <%= link_to new_business_owner_path do %>
+                  <button type="button" class="btn btn-info btn-round">Add Business Owner <i class="material-icons">add</i></button>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>Cover Photo</th>
+                <th>Business Name</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Business Type</th>
+                <th>Deals</th>
+                <th>Quests</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Cover Photo</th>
+                <th>Business Name</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Business Type</th>
+                <th>Deals</th>
+                <th>Quests</th>
+                <th>Actions</th>
+              </tr>
+              
+            </tfoot>
+            <tbody>
+              <% @business_owners.each do |business_owner| %>
+                <tr>
+                  <td>
+                    <% if business_owner.avatar.attached? %>
+                    <div class="cover-photo">
+                      <%= image_tag(business_owner.avatar, class: "img", style: "width: 100px;height:100px;") %>
+                    </div>
+                    <% else %>
+                    <%= image_tag("https://via.placeholder.com/100x100", class: "img") %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%if business_owner.business.present? %>
+                      <%= link_to "#{business_owner.business.business_name}", "/business_profile/#{business_owner.id}" %>
+                    <% else %>
+                      N/A
+                    <% end%>
+                    
+                  </td>
+                  <td><%= business_owner.phone_num.present? ?  business_owner.phone_num : "N/A"%></td>
+                  
+                  <td><%= business_owner.email %></td>
+                  <td>
+                    <% if business_owner.business.present? %>
+                      <% if business_owner.business.type_of_business == "Eateries/Rrestaurant" %>
+                      <%= business_owner.business.type_of_business %>
+                      <% elsif business_owner.business.type_of_business = "Others "%>
+                        <%= business_owner.business.other_business %>
+                      <% else %>
+                        <%= business_owner.business.type_of_business %>
+                      <% end %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                  </td>
+                  <td><%= link_to business_owner.deals.where(super_deal: nil).count, "/get_user_deals/#{business_owner.id}" %></td>
+                  <td><%= link_to business_owner.deals.where(super_deal: true).count, "/get_user_quests/#{business_owner.id}" %></td>
+                  
+                  <td class="text-right">
+                   <%= link_to admin_business_owner_path(business_owner), class: "btn btn-link btn-info btn-just-icon like" do %>
+                     <i class="material-icons">pageview</i>
+                   <% end %>
+                   <%= link_to edit_admin_business_owner_path(business_owner), class: "btn btn-link btn-warning btn-just-icon edit" do %>
+                     <i class="material-icons">dvr</i>
+                   <% end %>
+                   <%= link_to admin_business_owner_path(business_owner), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-danger btn-just-icon remove" do %>
+                     <i class="material-icons">close</i>
+                   <% end %>
+                    <%= link_to toggle_enable_status_admin_business_owner_path(business_owner), title: "Suspend" do %>
+                      <i aria-hidden="true" class="<%= business_owner.active ? 'enabled' : 'disabled flipped' %> fa fa-toggle-on"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              
+            </tbody>
+            
+          </table>
+        </div>
+      </div>
+      <!-- end content-->
+    </div>
+    <!--  end card  -->
+  </div>
+  <!-- end col-md-12 -->
+</div>

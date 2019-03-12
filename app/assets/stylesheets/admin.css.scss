@@ -1,0 +1,16 @@
+/* ...
+*= require custom
+*/
+@import 'css/material-dashboard.css';
+@import 'css/bootstrap-tour.min.css';
+@import  'dropzone/basic';
+@import 'dropzone/dropzone';
+
+
+.fileinput.fileinput-new.text-center.mb-30 {
+    margin-bottom: 30px;
+}
+
+.fontsize-14 {
+  font-size: 14px;
+}

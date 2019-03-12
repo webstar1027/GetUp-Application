@@ -1,0 +1,60 @@
+<div class="card-body ">
+  <div class="col-md-12 col-sm-12">
+    <% if @quest.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@quest.errors.count, "error") %> prohibited this quest from being saved:</h2>
+        <ul>
+          <% @quest.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @quest.deal.present? %>
+    <%= form.hidden_field :deal_id %>
+  <% end %>
+  <div id="deals">
+    <%= form.fields_for :deal, @quest.deal || Deal.new(super_deal: true) do |deal_form| %>
+      <% deal_form.object.super_deal = true %>
+      <%= render '/deals/fields', form: deal_form, deal: deal_form.object %>
+      <%= deal_form.hidden_field :super_deal %>
+    <% end %>
+    
+  </div>
+  
+  <div class="form-group">
+    <label class="bmd-label-floating">Quest Name</label>
+    <%= form.text_field :title, class: "form-control", title: "This Quest name is for your own reference and will not be shown to users.", autocomplete: false %>
+    
+  </div>
+  <div class="form-group" id="posted-date">
+
+    <%= form.text_field :start_datetime, class: "form-control datetimepicker", placeholder: "Quest Start Date & Time", value: (form.object.start_datetime.present? ? form.object.start_datetime.strftime("%d/%m/%Y %I:%M %p") : "") %>
+  </div>
+  <div class="form-group">
+    <%= form.text_field :end_datetime, class: "form-control datetimepicker2", placeholder: "Quest End Date & Time", title: "When to stop handing out coupons", value: (form.object.end_datetime.present? ? form.object.end_datetime.strftime("%d/%m/%Y %I:%M %p") : "") %>
+    <span class="bmd-help">When to stop handing out coupons</span>
+  </div>
+  <div class="form-group">
+    <label for="exampleEmail" class="bmd-label-floating">Instructions (Maximum 36 characters)</label>
+    <%= form.text_area :instructions, class: "form-control" %>
+  </div>
+    
+  <div class="form-group">
+    <label class="bmd-label-floating">Quest Location</label>
+    <div id="locations">
+      <%= form.fields_for :locations do |loc| %>
+        <%= render '/quests/location_fields', f: loc %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association '+ Location', form, :locations, partial: '/quests/location_fields' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-fill btn-theme" %>
+  </div>
+</div>

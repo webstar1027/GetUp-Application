@@ -1,0 +1,95 @@
+<% content_for :breadcrumb do %>
+  List of Coupons
+<% end %>
+<div class="row">
+  <% if notice %>
+  <div class="col-md-12">
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">local_offer</i>
+        </div>
+        <h4 class="card-title">Coupons</h4>
+      </div>
+      <div class="card-body">
+        <div class="toolbar">
+          <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables table-responsive">
+          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <td colspan="6"></td>
+              </tr>
+              <tr>
+                <th>Deal Name</th>
+                <th>Coupon Code</th>
+                <th>Claimed By</th>
+                <th>Claimed Date</th>
+                <th>Redeemed?</th>
+                <th>Redeem Date</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Deal Name</th>
+                <th>Coupon Code</th>
+                <th>Claimed By</th>
+                <th>Claimed Date</th>
+                <th>Redeemed?</th>
+                <th>Redeem Date</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+              
+            </tfoot>
+            <tbody>
+              <% @coupons.each do |coupon| %>
+                <tr>
+                  <td>
+                    <%= coupon.deal.name %>
+                  </td>
+                  <td>
+                    <%= coupon.code %>
+                  </td>
+                  <td><%= coupon.user.email %></td>
+                  <td><%= coupon.created_at.try(:strftime, '%d-%b-%Y') %></td>
+                  <td id="redeem-icon-column">
+                    <% if coupon.redeem? %>
+                      <i class="material-icons">check_circle</i>
+                    <% else %>
+                      <i class="material-icons" id="redeem-icon-off">highlight_off</i>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= coupon.updated_at.try(:strftime, '%d-%b-%Y') %>
+                  </td>
+                  <td id="redeem-column">
+                    <% if coupon.redeem? %>
+                      <button class="btn btn-sm">Redeemed!</button>
+                    <% else %>
+                      <%= button_to "Redeem", redeem_path(coupon.id), method: :post, class: "btn btn-green btn-sm", id: "redeem-coupon", remote: true %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              
+            </tbody>
+            
+          </table>
+        </div>
+      </div>
+      <!-- end content-->
+    </div>
+    <!--  end card  -->
+  </div>
+  <!-- end col-md-12 -->
+</div>
+

@@ -1,0 +1,110 @@
+<div class="content">
+  <div class="container-fluid">
+    <%= form_with(model: current_user, local: true, url: user_registration_path) do |f| %>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">perm_identity</i>
+            </div>
+            <h4 class="card-title">Edit Profile -
+              <small class="category">Complete your profile</small>
+            </h4>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Username</label>
+                    <%= f.text_field :username, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Phone num</label>
+                    <%= f.text_field :phone_num, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Email address</label>
+                    <%= f.email_field :email, class: 'form-control', disabled: true %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= f.select :gender, options_for_select(User.genders.keys.to_a, current_user.gender), {include_blank: "Select Gender"}, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Age</label>
+                    <%= f.number_field :age, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">City</label>
+                    <%= f.text_field :city, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <%= f.select :country_id, options_for_select(Country.all.map{|coun| [coun.name, coun.id]}, current_user.country_id), {include_blank: "Select Country"}, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Bio</label>
+                    <%= f.text_area :bio, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="togglebutton">
+                <label>
+                  <%= f.check_box :profile_mode %>
+                  <span class="toggle"></span>
+                  Public
+                </label>
+              </div>
+              <button type="submit" class="btn btn-rose pull-right">Update Profile</button>
+              <%= link_to "Preview", profile_path, class: "btn btn-rose pull-right"%>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+				<div class="card card-profile fileinput fileinput-new text-center" data-provides="fileinput">
+				<div class="card-avatar fileinput-new thumbnail">
+				  <% if current_user.avatar.try(:attached?) %>
+            <div class="cover-photo fileinput-new thumbnail" style="margin-bottom:0px !important;">
+              <% url = amazon_image_url(current_user) %>
+              <%= image_tag(url, class: "img", style: "width:100px;height:100px;") %>
+            </div>
+				  <% else %>
+				    <%= image_tag("https://via.placeholder.com/100x100", class: "img") %>
+				  <% end %>
+				</div>
+				<div class="card-avatar fileinput-preview fileinput-exists thumbnail" style= "width:100px;height:100px;"></div>
+				<br/>
+				<br/>
+				<div>
+				  <span class="btn btn-rose btn-round btn-file">
+				    <span class="fileinput-new">Select image</span>
+				    <span class="fileinput-exists">Change</span>
+				    <%= f.file_field :avatar, style: "width: 100px; height:100px"%>
+				  </span>
+				</div>
+				<br/>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

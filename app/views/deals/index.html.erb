@@ -1,0 +1,110 @@
+          <% content_for :breadcrumb do %>
+            List of Deals
+          <% end %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">place</i>
+                  </div>
+                  <h4 class="card-title">Deals</h4>
+                </div>
+                <div class="card-body">
+                  <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                  </div>
+                  <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                      <thead>
+                        <tr>
+                          <td colspan="2"></td>
+                          <% unless current_user.role == "user" %>
+                          <td colspan="8" class="text-right">
+                            <%= link_to new_deal_path do %>
+                            <button type="button" class="btn btn-green btn-round">Add new Deal <i class="material-icons">add</i></button>
+                            <% end %>
+                          </td>
+                          <% end %>
+                        </tr>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Posted Date</th>
+                          <th>Expiry Date</th>
+                          <th>Description</th>
+                          <% unless current_user.role == "business_owner" %>
+                            <th>Owner</th>
+                          <% end %>
+                          <% unless current_user.role == "user" %>
+                            <th>Coupon Issued</th>
+                            <th>Coupon Claimed</th>
+                            <th>Coupon Redeemed</th>
+                          <% end %>
+                          <th>Status</th>
+                          <th class="disabled-sorting text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Posted Date</th>
+                          <th>Expiry Date</th>
+                          <th>Description</th>
+                          <% unless current_user.role == "business_owner" %>
+                            <th>Business Owner</th>
+                          <% end %>
+                          <% unless current_user.role == "user" %>
+                            <th>Coupon Issued</th>
+                            <th>Coupon Claimed</th>
+                            <th>Coupon Redeemed</th>
+                          <% end %>
+                          <th>Status</th>
+                          <th class="disabled-sorting text-right">Actions</th>
+                        </tr>
+                        
+                      </tfoot>
+                      <tbody>
+                        <% @deals.each do |deal| %>
+                          <tr>
+                            <td><%= deal.id %></td>
+                            <td><%= deal.name %></td>
+                            <td><%= deal.posted_date.try(:strftime, '%d-%b-%Y') %></td>
+                            <td><%= deal.expiry_date.try(:strftime, '%d-%b-%Y') %></td>
+                            <td><%= deal.description %></td>
+                            <% unless current_user.role == "business_owner" %>
+                              <td><%= deal.user.username %></td>
+                            <% end %>
+                            <% unless current_user.role == "user" %>
+                              <td><%= deal.coupon_count %></td>
+                              <td><%= link_to deal.coupon_claimed, deal_coupons_path(deal) %></td>
+                              <td><%= deal.coupon_redeem_count %></td>
+                            <% end %>
+                            <td><%= deal.status %></td>
+                            <td class="text-right">
+                              <%= link_to deal, class: "btn btn-link btn-info btn-just-icon like" do %>
+                                <i class="material-icons">pageview</i>
+                              <% end %>
+                              <%= link_to edit_deal_path(deal), class: "btn btn-link btn-warning btn-just-icon edit" do %>
+                                <i class="material-icons">dvr</i>
+                              <% end %>
+                              <%= link_to deal, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-danger btn-just-icon remove", authenticity_token: true do %>
+                                <i class="material-icons">close</i>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                        
+                        
+                      </tbody>
+                      
+                    </table>
+                  </div>
+                </div>
+                <!-- end content-->
+              </div>
+              <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+          </div>

@@ -1,0 +1,110 @@
+
+<h4 class="title">Cover Image<br>
+<span class="fontsize-14">Upload an image of your product, brand logo or business that customer can recognize instantly. Recommended size of your image is 480x480 or higher.</span>
+</h4>
+<div class="fileinput fileinput-new text-center" data-provides="fileinput">
+<div class="fileinput-new thumbnail">
+  <% if form.object.cover_photo.try(:attached?) %>
+    <%= image_tag form.object.cover_photo, style: "width: 360px; height: 360px;"%>
+  <% else %>
+    <%= image_tag "/assets/img/image_placeholder.jpg", style: "width: 360px; height: 360px;"%>
+  <% end %>
+</div>
+<div class="fileinput-preview fileinput-exists thumbnail"></div>
+<div>
+  <span class="btn btn-green btn-round btn-file">
+    <span class="fileinput-new">Select image</span>
+    <span class="fileinput-exists">Change</span>
+    <%= form.file_field :cover_photo %>
+  </span>
+  <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+</div>
+</div>
+<% if !form.object.new_record? %>
+  <%= form.hidden_field :id %>
+<% end %>
+<div class="form-group">
+  <label class="bmd-label-floating">Deal Name</label>
+  <%= form.text_field :name, class: "form-control", title: "This deal name is for your own reference and will not be shown to users.", autocomplete: false %>
+  <span class="bmd-help">This deal name is for your own reference and will not be shown to users.</span>
+</div>
+<div class="form-group" id="posted-date">
+  <%= form.text_field :posted_date, class: "form-control datepicker", placeholder: "Promotion Start Date", value: (form.object.posted_date.present? ? form.object.posted_date.strftime("%d/%m/%Y") : "") %>
+</div>
+<div class="form-group">
+  <%= form.text_field :expiry_date, class: "form-control datepicker2", placeholder: "Promotion End Date", title: "When to stop handing out coupons", value: (form.object.expiry_date.present? ? form.object.expiry_date.strftime("%d/%m/%Y") : "") %>
+  <span class="bmd-help">When to stop handing out coupons</span>
+</div>
+<div class="form-group">
+  <label class="bmd-label-floating">Number of Coupons Available (Enter 0 for infinite coupons)</label>
+  <%= form.number_field :coupon_count, class: "form-control" %>
+</div>
+<div class="form-group">
+  <label for="exampleEmail" class="bmd-label-floating">Short Description (Maximum 36 characters)</label>
+  <%= form.text_area :description, class: "form-control" %>
+</div>
+<% unless deal.new_record? %>
+  <div class="form-group">
+    <label class="bmd-label-floating"></label>
+    <%= form.select :status, options_for_select([["Active", "Active"], ["Pending", "Pending"]], deal.status), {:prompt => "Select Status"}, {class: "form-control"}  %>
+  </div>
+<% end %>
+<% if current_user.role == "super_admin" %>
+<div class="form-group">
+  <label for="exampleEmail" class="bmd-label-floating"></label>
+  <%= form.select :user_id, options_for_select(User.pluck(:username,:id),deal.user_id), {:prompt => "Select Business Owner"}, {class: "form-control"}  %>
+</div>
+<% end %>
+<div class="form-group">
+  <%= form.select :discount_type, options_for_select([["Value discount", "Value discount"], ["Percentage discount", "Percentage discount"], ["Free Gift", "Free Gift"]], deal.discount_type), {:prompt => :blank}, { class: "selectpicker", data: {style: 'select-with-transition', size: 20 }, id: "deal_discount_type"}  %>
+</div>
+<div class="input-group mb-3" style="width: 120px;<%= get_display_discount_type(deal, 'percentage_discount')%>" id="percentage_discount">
+  <%= form.number_field :percentage_discount_remark, class: "form-control" %>
+  <div class="input-group-append">
+    <span class="input-group-text" style="padding-left: 0; font-size: 14px;">% OFF</span>
+  </div>
+</div>
+<div class="input-group mb-3" style="width: 150px;<%= get_display_discount_type(deal, 'value_discount')%>" id="value_discount">
+  <div class="input-group-append">
+    <span class="input-group-text" style="padding-left: 0; font-size: 14px;">BND</span>
+  </div>
+  <%= form.number_field :value_discount_remark, class: "form-control" %>
+  <div class="input-group-append">
+    <span class="input-group-text" style="padding-left: 0; font-size: 14px;">OFF</span>
+  </div>
+</div>
+<div class="input-group mb-3" style="width: 200px;<%= get_display_discount_type(deal, 'free_gift')%>" id="free_gift">
+  <div class="input-group-append">
+    <span class="input-group-text" style="padding-left: 0; font-size: 14px;">FREE</span>
+  </div>
+  <%= form.text_field :free_gift_remart, class: "form-control" %>
+</div>
+  
+<p style="margin-top:15px;"> Is this deal exclusive? <i class="material-icons" style="font-size: 14px;" data-toggle="tooltip" data-placement="right" title="Exclusive deal means that thisdeal is only available to GET UP! users, and not available to any other apps, mediums or and walk-in customers. Exclusive deals may be featured to more users and popular locations.">help_outline</i></p>
+<div class="checkbox-radios">
+  <div class="form-check">
+    <label class="form-check-label">
+      <%= form.radio_button :exclusive, true, class: "form-check-input", name: "deal[exclusive]" %>
+      Yes
+      <span class="circle">
+        <span class="check"></span>
+      </span>
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <%= form.radio_button :exclusive, false, class: "form-check-input", name: "deal[exclusive]" %> No
+      <span class="circle">
+        <span class="check"></span>
+      </span>
+    </label>
+  </div>
+</div>
+<div class="form-group">
+  <%= form.text_field :coupon_expiry_date, class: "form-control datepicker3", placeholder: "Deal Expiry Date", title: "The validity date of the coupon" %>
+  <span class="bmd-help">When to stop handing out coupons</span>
+</div>
+<div class="form-group">
+  <label for="exampleEmail" class="bmd-label-floating">Terms and Conditions (Maximum 400 characters)</label>
+  <%= form.text_area :terms, class: "form-control" %>
+</div>

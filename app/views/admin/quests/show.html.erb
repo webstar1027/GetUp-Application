@@ -1,0 +1,58 @@
+<% content_for :breadcrumb do %>
+  Quest
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">book</i>
+        </div>
+        <h4 class="card-title"><%= @quest.title %></h4>
+      </div>
+      <%
+        :ruby
+          deal = @quest.deal
+      %>
+      <div class="card-body">
+        <h4>Quest start date & time:</h4>
+        <p><%= @quest.start_datetime.try(:strftime, "%d-%b-%Y %I:%M %p") %></p>
+        <h4>Quest end date & time:</h4>
+        <p>
+          <%= @quest.end_datetime.try(:strftime, "%d-%b-%Y %I:%M %p") %>
+        </p>
+        <h4>Deal Name:</h4>
+        <p>
+          <%= deal.present? ? deal.name : "NA" %>
+        </p>
+        <h4>Coupon Issued:</h4>
+        <p>
+          <%= deal.present? ? (link_to deal.coupon_count, deal_coupons_path(deal)) : "NA" %>
+        </p>
+        <h4>Coupon Claimed:</h4>
+        <p>
+          <%= deal.present? ? deal.coupon_claimed : "NA" %>
+        </p>
+        <h4>Coupon Redeemed:</h4>
+        <p>
+          <%= deal.present? ? deal.coupon_redeem_count : "NA" %>
+        </p>
+        <h4>Locations:</h4>
+        <p>
+          <%= @quest.get_locations_name %>
+        </p>
+        <h4>Status:</h4>
+        <p>
+          <%= deal.present? ? deal.active? : "NA"%>
+        </p>
+        <h4>Instructions:</h4>
+        <p>
+          <%= @quest.instructions %>
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          

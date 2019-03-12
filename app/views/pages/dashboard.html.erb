@@ -1,0 +1,65 @@
+
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="content">
+          <div class="container-fluid">
+                        
+                        <h3>Manage POI</h3>
+                        <br>
+                        <div class="row">
+                          <% @pois.each do |poi| %>
+                          <div class="col-md-4">
+                            <div class="card card-product">
+                              <div class="card-header card-header-image" data-header-animation="true">
+                                <a href="#pablo">
+                                  <% if poi.avatar.attached? %>
+                                  <%= image_tag(poi.avatar, class: "img") %>
+                                  <% else %>
+                                  <%= image_tag("https://via.placeholder.com/300x200", class: "img") %>
+                                  <% end %>
+                                </a>
+                              </div>
+                              <div class="card-body">
+                                <div class="card-actions text-center">
+                                  <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                    <i class="material-icons">build</i> Fix Header!
+                                  </button>
+                                  <%= link_to pois_path(poi) do %>
+                                  <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                                    <i class="material-icons">art_track</i>
+                                  </button>
+                                  <% end %>
+                                  <%= link_to edit_pois_path(poi) do %>
+                                  <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <% end %>
+                                  <%= link_to pois_path(poi), method: :delete, data: { confirm: 'Are you certain you want to delete this?'} do %>
+                                  <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+                                    <i class="material-icons">close</i>
+                                  </button>
+                                  <% end %>
+                                </div>
+                                <h4 class="card-title">
+                                  <a href="#pablo"><%= poi.title %></a>
+                                </h4>
+                                <div class="card-description">
+                                  <%= poi.description %>
+                                </div>
+                              </div>
+                              <div class="card-footer">
+                                
+                                <div class="stats">
+                                  <p class="card-category"><i class="material-icons">place</i> Bandar Seri Begawan, Brunei Darussalam</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+             

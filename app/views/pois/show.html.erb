@@ -1,0 +1,101 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/js/mdb.js"></script>
+
+<style>
+  .cover-photo img{ width: 500px; }
+
+  @media screen and (max-width:767px) {
+    .cover-photo img{ width: 100%; }
+  }
+</style>
+
+<% content_for :breadcrumb do %>
+   <%= @poi.title %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <a href="#pablo">
+          <% if @poi.avatar.attached? %>
+            <%= image_tag(@poi.avatar, class: "img") %>
+          <% else %>
+            <%= image_tag("https://via.placeholder.com/300x200", class: "img") %>
+          <% end %>
+        </a>
+      </div>
+      <div class="card-body">
+        <h3>Title</h3>
+        <p>
+          <%= @poi.title %>
+        </p>
+        <h3>Description</h3>
+        <p>
+          <%= @poi.description %>
+        </p>
+
+        <% if @poi.images.attached? %>
+          <!--Carousel Wrapper-->
+          <div id="carousel-with-lb" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+            <!--Controls-->
+            <div class="controls-top">
+              <a class="btn-floating btn-secondary" href="#carousel-with-lb" data-slide="prev"><</i></a>
+              <a class="btn-floating btn-secondary" href="#carousel-with-lb" data-slide="next">></i></a>
+            </div>
+            <!--/.Controls-->
+
+            <!--Slides and lightbox-->
+
+            <div class="carousel-inner mdb-lightbox" role="listbox">
+              <div id="mdb-lightbox-ui"></div>
+              <!--First slide-->
+                <% @poi.images.each_with_index do |avatar,index| %>
+                  <div class="carousel-item text-center <%= 'active' if index == 0 %>">
+                  <figure class="d-md-inline-block">
+                    <%= image_tag(avatar, class: "img", style: "height: 500px") %>
+                  </figure>
+                </div>
+                <% end %>
+
+              </div>
+              <!--/.First slide-->
+            </div>
+            <!--/.Slides-->
+          </div>
+          <!--/.Carousel Wrapper-->
+        <% end %>
+        <div id="map-dashboard"></div>
+        <script>
+          var map;
+          function initMap() {
+              var myLatlng = new google.maps.LatLng(<%= @poi.lat %>,<%= @poi.lng %>);
+              var mapOptions = {
+                  zoom: 12,
+                  center: myLatlng,
+                  zoomControl: true,
+                  scaleControl: true,
+                  disableDefaultUI: true,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+              var map = new google.maps.Map(document.getElementById('map-dashboard'),mapOptions);
+        
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  title:"Hello World!"
+              });
+        
+              // To add the marker to the map, call setMap();
+              marker.setMap(map);
+
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt6EKYip9qRaxIYB6cKQTXQYOnW_5Xs_A&callback=initMap"
+        async defer></script>
+      </div>
+    </div>
+</div>
+
+          

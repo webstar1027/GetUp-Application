@@ -1,0 +1,63 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">local_offer</i>
+        </div>
+        <h4 class="card-title"><%= @deal.name %></h4>
+      </div>
+      <div class="card-body">
+      	<h4>Business Name:</h4>
+      	<p><%= @deal.user.username %></p>
+        <h4>Description:</h4>
+        <p>
+          <%= @deal.description %>
+        </p>
+        <h4>Posted Date:</h4>
+        <p>
+          <%= @deal.posted_date.try(:strftime, '%d-%b-%Y') %>
+        </p>
+        <h4>Expiry Date:</h4>
+        <p>
+          <%= @deal.expiry_date.try(:strftime, '%d-%b-%Y') %>
+        </p>
+        <h4>Status:</h4>
+        <p>
+          <%= @deal.status %>
+        </p>
+        <h4>Coupon Count:</h4>
+        <p>
+          <%= @deal.coupon_counter %>
+        </p>
+        <h4>Discount Type:</h4>
+        <p>
+          <%= @deal.discount_type %>
+        </p>
+        <h4>Exclusive:</h4>
+        <p>
+          <%= @deal.exclusivity %>
+        </p>
+        <h4>Coupon Expiry Date:</h4>
+        <p>
+          <%= @deal.coupon_expiry_date.try(:strftime, '%d-%b-%Y') %>
+        </p>
+        <h4>Terms and Conditions:</h4>
+        <p>
+          <%= @deal.terms %>
+        </p>
+        
+        <% if !@deal.super_deal %>
+          <% if @deal.claimed_users.include? current_user %>
+            <button class="btn btn-info btn-lg">Claimed!</button>
+          <% else %>
+            <%= button_to "Claim Deal", claim_path(@deal.id), method: :post, class: "btn btn-theme btn-lg", id: "claim-deal", remote: true %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+          

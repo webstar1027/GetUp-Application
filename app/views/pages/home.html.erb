@@ -1,0 +1,390 @@
+
+  <div class="main">
+    <div class="cd-section" id="headers">
+      <!--     *********     HEADER 2      *********      -->
+      <div class="header-2">
+        <div class="page-header header-filter" style="background-image: url('./assets/img/examples/Slider-BG-1.jpg');">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 ml-auto mr-auto text-center">
+                <h1 class="title"> Explore places. Earn rewards.</h1>
+                <h4>Visit places of interests and collect discounts from your favourite airlines, restaurants and retail stores. Your adventure begins right now with Get Up!</h4>
+              </div>
+              <div class="col-md-10 ml-auto mr-auto">
+                <div class="card card-raised card-form-horizontal">
+                  <div class="card-body ">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { autocomplete: "off" }) do |f| %>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <%= f.text_field :username, placeholder: "Username", class: "form-control" %>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <%= f.email_field :email, placeholder: "Company Email", class: "form-control", autocomplete: false %>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <%= f.password_field :password, placeholder: "Password", class: "form-control", autocomplete: false %>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <%= f.submit "Sign up", class: "btn btn-primary btn-block" %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--     *********    END HEADER 2      *********      -->
+    </div>
+    <div class="cd-section" id="features">
+      <div class="container">
+        <!--     *********     FEATURES 1      *********      -->
+        <div class="features-1">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <h2 class="title">Get up and get exclusive deals.</h2>
+              <h5 class="description">Download Get Up! from either Apple Store or Play Store and start your rewarding adventures today.</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-info">
+                  <i class="material-icons">get_app</i>
+                </div>
+                <h4 class="info-title">Download the app</h4>
+                <p>Available in both Android and iOS. Download Get Up! and turn your every trip a worthy adventure.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-success">
+                  <i class="material-icons">place</i>
+                </div>
+                <h4 class="info-title">Explore places</h4>
+                <p>Your nearby park, or that beach you always go, has just been made exciting again. Check the map and see what surprises are in store for you.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-danger">
+                  <i class="material-icons">attach_money</i>
+                </div>
+                <h4 class="info-title">Earn rewards</h4>
+                <p>If going places with your loved ones is awesome, we've just made it perfect. Earn discounts on almost everything by simply checking in with Get Up!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--     *********    END FEATURES 1      *********      -->
+        <!--     *********     FEATURES 3      *********      -->
+        <div class="features-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="phone-container">
+                <img src="./assets/img/sections/iPhone-8-Gold-Perspective-Free-Mockup.png">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <!-- Some <br /> tags to push the text to align with the image, you can remove it if you have more text on the right side :-) -->
+              <h2 class="title">Unbelievably amazing fantastic rewards.</h2>
+              <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">restaurant_menu</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Restaurant discounts</h4>
+                  <p>From that sushi restaurant to your favourite pizzeria, explore hundreds of exclusive discounts with Get Up!</p>
+                </div>
+              </div>
+              <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">airplanemode_active</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Air ticket discounts</h4>
+                  <p>Didn't manage to cross out your travel checklist last year? Your next dream vacation is just a checkpoint away.</p>
+                </div>
+              </div>
+              <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">shopping_basket</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Retail store discounts</h4>
+                  <p>Shoes, socks, shirts, you name it, it's all in Get Up! Oh and your favourite gadget shop too.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--     *********    END FEATURES 3      *********      -->
+      </div>
+      <!--     *********     FEATURES 5      *********      -->
+      <div class="features-5" style="background-image: url('./assets/img/Parallax.jpg'); height: 300px;">
+        
+      </div>
+      <!--     *********    END FEATURES 5      *********      -->
+    </div>
+    <div class="cd-section" id="blogs">
+      <div class="blogs-4" id="blogs-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <h2 class="title">Our News</h2>
+              <br>
+              <div class="card card-plain card-blog">
+                <div class="card-header card-header-image">
+                  <a href="#pablo">
+                    <img class="img img-raised" src="./assets/img/brunei-pic.png">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category text-info">News</h6>
+                  <h3 class="card-title">
+                    <a href="#pablo">Gamified tourism app Get Up wins first Brunei Hacks</a>
+                  </h3>
+                  <h5 class="card-description">
+                    Get Up are looking to build a gamified tourism mobile application that will reward users as they discover and visit new places in Brunei, after emerging as the winners of the first Brunei Hacks over the weekend at Progresif’s HQ in Gadong...
+                  </h5>
+                  <a href="#pablo" class="btn btn-primary btn-round"> Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--     *********    END BLOGS 4      *********      -->
+    </div>
+    <div class="cd-section" id="teams">
+      <!--     *********    TEAM 4     *********      -->
+      <div class="team-4 section-image" style="background-image: url('./assets/img/bg7.jpg')">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+              <h2 class="title">Get Up! Team</h2>
+              <h5 class="description"></h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile1-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Philip Yam</h4>
+                  <h6 class="card-category text-muted">Idea Factory aka CEO</h6>
+                  <p class="card-description">
+                    Could never decide between a super good meal or an exciting adventure. And thus, Get Up! is born.
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-linkedin btn-round"><i class="fa fa-linkedin"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile2-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Pierre Yam</h4>
+                  <h6 class="card-category text-muted">That Hacker aka CTO</h6>
+                  <p class="card-description">
+                    You know what? A developer needs to Get Up!, move around, get some exercise and grab some rewards along the way too. 
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile4-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body ">
+                  <h4 class="card-title">Stella Loke</h4>
+                  <h6 class="card-category text-muted">Task Generator aka COO</h6>
+                  <p class="card-description">
+                    Traveller at heart, foodie in the soul. Get Up! and move around before that special dining occasion to burn off the extra calories. 
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-pinterest btn-round"><i class="fa fa-pinterest"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile1-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Alec Thompson</h4>
+                  <h6 class="card-category text-muted">CEO / Co-Founder</h6>
+                  <p class="card-description">
+                    Don&apos;t be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens&#x2019; bed design but the back is...
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-linkedin btn-round"><i class="fa fa-linkedin"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile2-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">George West</h4>
+                  <h6 class="card-category text-muted">Backend Hacker</h6>
+                  <p class="card-description">
+                    Don&apos;t be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens&#x2019; bed design but the back is...
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/faces/card-profile4-square.jpg" />
+                  </a>
+                </div>
+                <div class="card-body ">
+                  <h4 class="card-title">Gina Andrew</h4>
+                  <h6 class="card-category text-muted">Web Designer</h6>
+                  <p class="card-description">
+                    Don&apos;t be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens&#x2019; bed design but the back is...
+                  </p>
+                </div>
+                <div class="card-footer justify-content-center">
+                  <a href="#pablo" class="btn btn-just-icon btn-dribbble btn-round"><i class="fa fa-dribbble"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round"><i class="fa fa-twitter"></i></a>
+                  <a href="#pablo" class="btn btn-just-icon btn-pinterest btn-round"><i class="fa fa-pinterest"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--     *********    END TEAM 4      *********      -->
+      
+    </div>
+    <div class="cd-section" id="contactus">
+      <!--     *********    CONTACT US 2     *********      -->
+      <div class="contactus-2">
+        <div id="contactUs2Map" class="map"></div>
+        <div class="col-md-6">
+          <div class="card card-contact card-raised">
+            <form id="contact-form2" method="post">
+              <div class="card-header card-header-rose text-center">
+                <h4 class="card-title">Contact Us</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="info info-horizontal">
+                      <div class="icon icon-rose">
+                        <i class="material-icons">phone</i>
+                      </div>
+                      <div class="description">
+                        <h5 class="info-title">Give us a ring</h5>
+                        <p> Pierre Yam
+                          <br> +673 7120893
+                          <br> Mon - Fri, 8:00-22:00
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info info-horizontal">
+                      <div class="icon icon-rose">
+                        <i class="material-icons">pin_drop</i>
+                      </div>
+                      <div class="description">
+                        <h5 class="info-title">Find us at the office</h5>
+                        <p> Lot 4484, X13,
+                          <br> Jln Maulana, KB,
+                          <br> Brunei Darussalam
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group label-floating is-empty has-rose">
+                      <label class="bmd-label-floating">Full Name</label>
+                      <input type="text" name="email" class="form-control">
+                      <span class="material-input"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group label-floating is-empty has-rose">
+                      <label class="bmd-label-floating">Email address</label>
+                      <input type="email" name="email" class="form-control">
+                      <span class="material-input"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group label-floating has-rose is-empty">
+                  <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+                  <textarea name="message" class="form-control" id="exampleMessage" rows="6"></textarea>
+                  <span class="material-input"></span>
+                </div>
+              </div>
+              <div class="card-footer justify-content-between">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value=""> I'm not a robot
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-rose pull-right">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--     *********    END CONTACT US 2      *********      -->
+    </div>
+  </div>

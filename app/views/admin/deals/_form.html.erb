@@ -1,0 +1,21 @@
+<%= form_with(model: @deal, local: true, url: @deal.id.present? ? admin_deal_path(@deal) : admin_deals_path ) do |form| %>
+  <div class="card-body ">
+    <div class="col-md-12 col-sm-12">
+        <% if @deal.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+            <ul>
+              <% deal.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    </div>
+    <%= render "admin/deals/fields", form: form, deal: deal %>
+  </div>
+
+  <div class="card-footer ">
+    <%= form.submit "Submit", class: "btn btn-fill btn-theme" %>
+  </div>
+<% end %>

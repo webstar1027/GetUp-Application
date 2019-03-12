@@ -1,0 +1,20 @@
+<% content_for :breadcrumb do %>
+  Edit POI
+<% end %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-rose card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">place</i>
+        </div>
+        <h4 class="card-title">Edit POI</h4>
+      </div>
+      <%= render 'form', poi: @poi %>
+      <%= link_to admin_pois_path(@poi) do %>
+      <button class="btn btn-fill btn-rose">Show</button>
+      <% end %>
+    </div>
+  </div>
+</div>

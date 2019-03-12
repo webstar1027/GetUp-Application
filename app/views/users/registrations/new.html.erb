@@ -1,0 +1,6 @@
+  <% content_for :body_class, "signup-page sidebar-collapse" %>
+  <% if params[:user].present? %>
+    <%= render 'user', locals: {resource: resource}%>
+  <% else %>
+    <%= render 'business_owner', locals: {resource: resource}%>
+  <% end %>

@@ -1,0 +1,49 @@
+
+<% content_for :body_class, "login-page sidebar-collapse" %>
+<div class="page-header header-filter" style="background-image: url(<%= asset_path '/assets/img/bg7.jpg' %>); background-size: cover; background-position: top center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
+          <div class="card card-login card-hidden">
+            <div class="card-header card-header-primary text-center">
+              <% if resource.errors.any? %>
+                  <% (resource.errors.messages || []).each do |error|  %>
+                      <li><%= "#{error.flatten.first}: #{error.flatten.last}" %></li>
+                  <% end %>
+              <% else %>
+                  <h4 class="card-title">Change your password</h4>
+              <% end %>
+            </div>
+            <%= f.hidden_field :reset_password_token %>
+            <div class="card-body ">
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    </span>
+                  </div>
+                  <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: "New password" %>
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    </span>
+                  </div>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control",  placeholder: "Confirm new password" %>
+                </div>
+              </span>
+            </div>
+            <div class="card-footer justify-content-center">
+              <%= f.submit "Change my password", class: "btn btn-rose btn-link btn-lg" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-warning card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">local_offer</i>
+        </div>
+        <p class="card-category">My Rewards</p>
+        <h3 class="card-title"><%= current_user.deals.count %></h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">card_membership</i>
+        </div>
+        <p class="card-category">Saved Deals</p>
+        <h3 class="card-title"><%= current_user.coupons.count %></h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-info card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">people</i>
+        </div>
+        <p class="card-category">Friends</p>
+        <h3 class="card-title">+<%= current_user.coupons.map(&:user_id).uniq.count %></h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-success card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">store</i>
+        </div>
+        <p class="card-category">My POI</p>
+        <h3 class="card-title"><%= current_user.coupons.redeemed.count %></h3>
+  
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3>Notifications</h3>
+<br>
+<div class="row">
+  <% (@deals || []).each do |d| %>
+  <div class="col-md-4">
+    <div class="card card-product">
+      <div class="card-header card-header-image" data-header-animation="true">
+        <a href="#pablo">
+          <% if d.cover_photo.attached? %>
+          <%= image_tag d.cover_photo, class: "img" %>
+          <% else %>
+          <img class="img" src="../assets/img/card-2.jpg">
+          <% end %>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-actions text-center">
+          <button type="button" class="btn btn-danger btn-link fix-broken-card">
+            <i class="material-icons">build</i> Fix Header!
+          </button>
+          <%= link_to deal_path(d) do %>
+            <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+              <i class="material-icons">art_track</i>
+            </button>
+          <% end %>
+          <%= link_to edit_deal_path(d) do %>
+            <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+              <i class="material-icons">edit</i>
+            </button>
+          <% end %>
+          <%= link_to deal_path(d), data: { confirm: 'Are you sure?' }, method: :delete do %>
+            <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+              <i class="material-icons">close</i>
+            </button>
+          <% end %>
+        </div>
+        <h4 class="card-title">
+          <a href="#pablo"><%= d.name %></a>
+        </h4>
+        <div class="card-description">
+          <%= d.description %>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+           <p class="card-category">Expired at: <%= d.expiry_date.try(:strftime, '%d-%b-%Y') %></p>
+        </div>
+        <div class="stats">
+          <p class="card-category"><i class="material-icons">card_membership</i><%= d.coupon_claimed %> claimed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+

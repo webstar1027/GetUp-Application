@@ -1,0 +1,76 @@
+          <li class="nav-item active ">
+            <%= link_to bo_dashboard_path, class: "nav-link" do %>
+              <i class="material-icons">dashboard</i>
+              <p> Dashboard </p>
+            <% end %>
+          </li>
+          <li class="nav-item " id="ourdeals">
+            <a class="nav-link" data-toggle="collapse" href="#deals">
+              <i class="material-icons">local_offer</i>
+              <p> Our Deals
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="deals">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to deals_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to new_deal_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> A </span>
+                    <span class="sidebar-normal"> Add </span>
+                  <% end %>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+          <% if current_user.quest_option %>
+          <li class="nav-item " id="ourdeals">
+            <a class="nav-link" data-toggle="collapse" href="#superdeals">
+              <i class="material-icons">local_offer</i>
+              <p> Our Quests
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="superdeals">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to bo_quests_list_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to request_for_quest_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> R </span>
+                    <span class="sidebar-normal"> Request </span>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <% end %>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#coupons">
+              <i class="material-icons">card_membership</i>
+              <p> Coupons
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse" id="coupons">
+              <ul class="nav">
+                <li class="nav-item ">
+                  <%= link_to coupons_path, class: "nav-link" do %>
+                    <span class="sidebar-mini"> L </span>
+                    <span class="sidebar-normal"> List </span>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </li>
+          

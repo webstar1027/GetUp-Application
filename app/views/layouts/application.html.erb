@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="google-site-verification" content="DwVa2fPv58iab54nmLQaNZv1x1_k2S30ulC-1wbjQeo" />
+    <title>Getup</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt6EKYip9qRaxIYB6cKQTXQYOnW_5Xs_A"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= yield (:body_class) %>">
+    <nav class="navbar navbar-transparent navbar-absolute navbar-expand-lg">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-translate">
+          <%= link_to root_path do %>
+            <%= image_tag("GET UP LOGO - WHITE.svg", class: "navbar-brand", style: "height: 70px;") %>
+          <% end %>
+          <button type="button" class="ml-auto navbar-toggler" data-toggle="collapse" data-target="#navigation-example2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navigation-example2">
+          <ul class="navbar-nav navbar-center ml-auto">
+            <li class="nav-item">
+              <%= link_to root_path, class: "nav-link" do %>
+                Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to deals_list_path, class: "nav-link" do %>
+                Deals
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <a href="#pablo" class="nav-link">
+                Products
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pablo" class="nav-link">
+                Contact Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= link_to public_quests_path, class: "nav-link" do %>
+                Quests
+              <% end %>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, class: "nav-link" do %>
+                Sign out
+                <% end %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, class: "nav-link" do %>
+                Sign In
+                <% end %>
+              </li>
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true">
+                  Register
+                <div class="ripple-container"></div></a>
+                <div class="dropdown-menu dropdown-with-icons">
+                  <%= link_to new_user_registration_path(user: 'user'), class: "nav-link" do %>
+                     As User
+                  <% end %>
+                  <%= link_to new_user_registration_path(business_owner: 'business_owner'), class: "nav-link" do %>
+                    as business Owner
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="https://twitter.com/GetUp65939149" class="nav-link">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://fb.me/getupexplore" class="nav-link">
+                <i class="fa fa-facebook-square"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.instagram.com/getupexploree/" class="nav-link">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+    <footer class="footer">
+      <div class="container">
+        <nav class="float-left">
+          <ul>
+            <li>
+              <a href="https://www.getupexplore.com">
+                GET UP!
+              </a>
+            </li>
+            <li>
+              <a href="https://www.getupexplore.com">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="https://www.getupexplore.com">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://www.getupexplore.com">
+                Terms & Condtions
+              </a>
+            </li>
+            <li>
+              <a href="https://www.getupexplore.com">
+                Privacy Policy
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright float-right">
+          &copy;
+          <script>
+            document.write(new Date().getFullYear())
+          </script>, made with <i class="material-icons">favorite</i> by
+          <a href="https://www.voffmon.com" target="_blank">Voffmon</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

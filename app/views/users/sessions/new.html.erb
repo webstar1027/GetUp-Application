@@ -1,0 +1,68 @@
+  <% content_for :body_class, "login-page sidebar-collapse" %>
+  
+  <div class="page-header header-filter" style="background-image: url('../assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form") do |f| %>
+            <div class="card card-login card-hidden">
+              <div class="card-header card-header-primary text-center">
+                <h4 class="card-title">Login</h4>
+                <div class="social-line">
+                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-just-icon btn-link btn-white" do %>
+                      <i class="fa fa-facebook-square"></i>
+                    <% end %>  
+                  </a>
+                  <%= link_to user_twitter_omniauth_authorize_path, class: "btn btn-just-icon btn-link btn-white" do %>
+                      <i class="fa fa-twitter"></i>
+                    <% end %>
+                  </a>
+                  <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-just-icon btn-link btn-white" do %>
+                      <i class="fa fa-google-plus"></i>
+                    <% end %>  
+                  </a>
+                </div>
+              </div>
+              <div class="card-body ">
+                <span class="bmd-form-group">
+                  <div class="text-center be-classical">Or Be Classical</div>
+									<span class="text-right" style="color:#f44336; margin-left:29px;"><%= alert %></span>
+									
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                      </span>
+                    </div>
+                    <%= f.email_field :email, class: "form-control", placeholder: "Email..." %>
+                  </div>
+                </span>
+                <span class="bmd-form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <%= f.password_field :password, class: "form-control", placeholder: "Password..." %>
+                  </div>
+                </span>
+                <div class="text-center forgot-pass">
+                  <%- if devise_mapping.recoverable? %>
+                    <small><%= link_to 'Forgot password?' , new_password_path(resource_name) %></small>
+                  <% end -%>
+                </div>
+              </div>
+              <div class="card-footer justify-content-center">
+                <%= f.submit "Lets Go", class: "btn btn-rose btn-link btn-lg" %>
+              </div>
+              <div class="text-center">
+                <p>New to Get Up? <%= link_to "Join Now", new_user_registration_path(user: 'user') %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+  </div>

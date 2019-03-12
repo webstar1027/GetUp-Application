@@ -1,0 +1,102 @@
+ <li class="nav-item active ">
+  <%= link_to user_dashboard_path, class: "nav-link" do %>
+    <i class="material-icons">dashboard</i>
+    <p> Dashboard </p>
+  <% end %>
+</li>
+<li class="nav-item " id="ourdeals">
+  <a class="nav-link" data-toggle="collapse" href="#deals">
+    <i class="material-icons">place</i>
+    <p> FeedBack
+      <b class="caret"></b>
+    </p>
+  </a>
+  <div class="collapse" id="deals">
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to new_feedback_path, class: "nav-link" do %>
+          <span class="sidebar-mini"> F </span>
+          <span class="sidebar-normal">New</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</li>
+<li class="nav-item " id="ourdeals">
+  <a class="nav-link" data-toggle="collapse" href="#rewards">
+    <i class="material-icons">local_offer</i>
+    <p> My Rewards
+      <b class="caret"></b>
+    </p>
+  </a>
+  <div class="collapse" id="rewards">
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to "#", class: "nav-link" do %>
+          <span class="sidebar-mini"> L </span>
+          <span class="sidebar-normal"> List </span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</li>
+<li class="nav-item " id="ourdeals">
+  <a class="nav-link" data-toggle="collapse" href="#saved">
+    <i class="material-icons">book</i>
+    <p> Saved Deals
+      <b class="caret"></b>
+    </p>
+  </a>
+  <div class="collapse" id="saved">
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to "#", class: "nav-link" do %>
+          <span class="sidebar-mini"> L </span>
+          <span class="sidebar-normal"> List </span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</li>
+<li class="nav-item " id="ourdeals">
+  <a class="nav-link" data-toggle="collapse" href="#friends">
+    <i class="material-icons">nature_people</i>
+    <p> Friends
+      <b class="caret"></b>
+    </p>
+  </a>
+  <div class="collapse" id="friends">
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to friends_path, class: "nav-link" do %>
+          <span class="sidebar-mini"> L </span>
+          <span class="sidebar-normal"> List </span>
+        <% end %>
+      </li>
+      <li class="nav-item ">
+        <%= link_to "#", class: "nav-link" do %>
+          <span class="sidebar-mini"> A </span>
+          <span class="sidebar-normal"> Add </span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</li>
+<li class="nav-item " id="ourdeals">
+  <a class="nav-link" data-toggle="collapse" href="#poi">
+    <i class="material-icons">business_centre</i>
+    <p> My POI
+      <b class="caret"></b>
+    </p>
+  </a>
+  <div class="collapse" id="poi">
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to "#", class: "nav-link" do %>
+          <span class="sidebar-mini"> L </span>
+          <span class="sidebar-normal"> List </span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</li>

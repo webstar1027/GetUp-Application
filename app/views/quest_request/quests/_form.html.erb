@@ -1,0 +1,3 @@
+<%= form_with(model: [:quest_request, @quest], local: true) do |form| %>
+  <%= render "/quests/fields", form: form, quest: @quest %>
+<% end %>

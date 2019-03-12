@@ -1,0 +1,84 @@
+<% content_for :breadcrumb do %>
+  Businesses
+<% end %>
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">business</i>
+        </div>
+        <h4 class="card-title">Businesses</h4>
+      </div>
+      <div class="card-body">
+        <div class="toolbar">
+          <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables table-responsive">
+          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+            <thead>
+              <tr>
+                <td colspan="6"></td>
+                <td colspan="2" class="text-right">
+                  <%= link_to new_business_path do %>
+                  <button type="button" class="btn btn-info btn-round">Add Business<i class="material-icons">add</i></button>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>Business name</th>
+                <th>Type of business</th>
+                <th>Halal</th>
+                <th>District</th>
+                <th>Address</th>
+                <th>Coordinate</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Business name</th>
+                <th>Type of business</th>
+                <th>Halal</th>
+                <th>District</th>
+                <th>Address</th>
+                <th>Coordinate</th>
+                <th class="disabled-sorting text-right">Actions</th>
+              </tr>
+              
+            </tfoot>
+            <tbody>
+              <% @businesses.each do |business| %>
+                <tr>
+                  <td><%= business.business_name %></td>
+                  <td><%= business.type_of_business %></td>
+                  <td><%= business.halal %></td>
+                  <td><%= business.district %></td>
+                  <td><%= business.address %></td>
+                  <td><%= business.coordinate %></td>
+                  <td class="text-right">
+                   <%= link_to business_path(business), class: "btn btn-link btn-info btn-just-icon like" do %>
+                     <i class="material-icons">pageview</i>
+                   <% end %>
+                   <%= link_to edit_business_path(business), class: "btn btn-link btn-warning btn-just-icon edit" do %>
+                     <i class="material-icons">dvr</i>
+                   <% end %>
+                   <%= link_to business_path(business), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-danger btn-just-icon remove" do %>
+                     <i class="material-icons">close</i>
+                   <% end %>
+                  </td>
+                </tr>
+              <% end %>
+                  
+            </tbody>
+            
+          </table>
+        </div>
+      </div>
+      <!-- end content-->
+    </div>
+    <!--  end card  -->
+  </div>
+  <!-- end col-md-12 -->
+</div>

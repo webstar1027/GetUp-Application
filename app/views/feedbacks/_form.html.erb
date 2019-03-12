@@ -1,0 +1,11 @@
+<%= form_for :feedback, url: feedbacks_path do |f| %>
+  <div class="card-body ">
+      <div class="form-group">
+        <label for="exampleEmail" class="bmd-label-floating">Leave us a feedback</label>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+  <div class="card-footer ">
+    <%= f.submit "Submit", class: "btn btn-fill btn-theme" %>
+  </div>
+<% end %>
+

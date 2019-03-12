@@ -1,0 +1,315 @@
+<style>
+  /* PAGE & INPUT STYLING */
+  body {
+    background: #FFF;
+    color: #000;
+  }
+
+  input[type="radio"].toggle {
+    display: none;
+  }
+  input[type="radio"].toggle + label {
+    cursor: pointer;
+    min-width: 80px;
+  }
+  input[type="radio"].toggle + label:hover {
+    background: none;
+    color: #FFF;
+  }
+  input[type="radio"].toggle + label:after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    -webkit-transition: left 100ms cubic-bezier(0.77, 0, 0.175, 1);
+    transition: left 100ms cubic-bezier(0.77, 0, 0.175, 1);
+    width: 100%;
+    z-index: -1;
+  }
+  input[type="radio"].toggle.toggle-left + label {
+  }
+  input[type="radio"].toggle.toggle-left + label:after {
+    left: 100%;
+  }
+  input[type="radio"].toggle.toggle-right + label {
+    margin-left: 10px;
+  }
+  input[type="radio"].toggle.toggle-right + label:after {
+    left: -100%;
+  }
+  input[type="radio"].toggle:checked + label {
+    background: #FFF;
+    cursor: default;
+    color: #000;
+  }
+  input[type="radio"].toggle:checked + label:after {
+    left: 0;
+  }
+
+  /* ENDS */
+
+  /* UPFORM STYLE STARTS*/
+  .upform input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+    border-color: blue !important;
+  }
+  .upform input, select, textarea {
+    color: #000;
+  }
+  .upform {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+  		            supported by Chrome and Opera */
+    max-width: 900px;
+    margin-bottom: 500px;
+  }
+
+  .upform .upform-main {
+  }
+  .upform .upform-main .input-block {
+    padding: 30px 0;
+    opacity: 0.25;
+    cursor: default;
+  }
+  .upform .upform-main .input-block .label {
+    display: block;
+    font-size: 1.1em;
+    line-height: 30px;
+  }
+  .upform .upform-main .input-block .input-control {
+    margin: 20px 0;
+  }
+
+  .upform .upform-main .input-block.active {
+    opacity: 1;
+  }
+
+  .upform .upform-footer {
+    margin-top: 60px;
+  }
+
+  /* UPFORM STYLE ENDS*/
+  </style>
+
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <h1 class="title">Fill our survey form</h1>
+          <h4>Let's help tourism together!</h4>
+          <br>
+          <a href="#pablo" class="btn btn-rose btn-round btn-lg">
+            <i class="material-icons">format_align_left</i> Start Now!
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main main-raised">
+    <div class="section section-basic">
+      <div class="container">
+        <h2>Survey</h2>
+        <div class="upform">
+          <form>
+            <div class="upform-main">
+              <div class="input-block">
+                <div class="label">Are you willing to support Brunei's tourism?</div>
+                <div class="input-control">
+                  <input id="toggle-on-q1" class="toggle toggle-left" name="q1" value="yes" type="radio">
+                  <label for="toggle-on-q1" class="btn btn-info">Yes</label>
+                  <input id="toggle-off-q1" class="toggle toggle-right" name="q1" value="no" type="radio">
+                  <label for="toggle-off-q1" class="btn btn-info">No</label>
+                </div>
+              </div>
+
+              <div class="input-block">
+                <div class="label">What exclusive offers do you wish to earn?</div>
+                <select class="selectpicker" data-style="select-with-transition" title="Single Select" data-size="10">
+                  <option disabled>Choose offers</option>
+                  <option value="2">Flight Discount</option>
+                  <option value="3">Eateries / Restaurants Deal</option>
+                  <option value="4">Retailer</option>
+                  <option value="5">Online Shopping</option>
+                  <option value="5">Others</option>
+                </select>
+              </div>
+              <div class="input-block">
+                <div class="label">Are you ready to explore interesting places in Brunei, while being rewarded with exclusive discounts from your favourite airlines, eateries, and retail shops?</div>
+                <div class="input-control">
+                  <input id="toggle-on-q3" class="toggle toggle-left" name="q3" value="yes" type="radio">
+                  <label for="toggle-on-q3" class="btn btn-info">Yes</label>
+                  <input id="toggle-off-q3" class="toggle toggle-right" name="q3" value="no" type="radio">
+                  <label for="toggle-off-q3" class="btn btn-info">No</label>
+                </div>
+              </div>
+              <div class="input-block">
+                <div class="label">Name one or more place of interest that you'd highly recommend tourists in Brunei</div>
+                <div class="form-group has-default">
+                  <input type="text" class="form-control" placeholder="Suggestions...">
+                </div>
+              </div>
+            </div>
+            <div class="upform-footer">
+              <button type="submit" class="btn btn-info btn-lg">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+<script>
+  $.fn.upform = function() {
+    var $this = $(this);
+    var container = $this.find(".upform-main");
+
+    $(document).ready(function() {
+      $(container).find(".input-block").first().click();
+    });
+
+    $($this).find("form").submit(function() {
+      return false;
+    });
+
+    $(container)
+      .find(".input-block")
+      .not(".input-block input")
+      .on("click", function() {
+      rescroll(this);
+    });
+
+    $(container).find(".input-block input").keypress(function(e) {
+      if (e.which == 13) {
+        if ($(this).hasClass("required") && $(this).val() == "") {
+        } else moveNext(this);
+      }
+    });
+
+    $(container).find('.input-block input[type="radio"]').change(function(e) {
+      moveNext(this);
+    });
+
+    $(window).on("scroll", function() {
+      $(container).find(".input-block").each(function() {
+        var etop = $(this).offset().top;
+        var diff = etop - $(window).scrollTop();
+
+        if (diff > 100 && diff < 300) {
+          reinitState(this);
+        }
+      });
+    });
+
+    function reinitState(e) {
+      $(container).find(".input-block").removeClass("active");
+
+      $(container).find(".input-block input").each(function() {
+        $(this).blur();
+      });
+      $(e).addClass("active");
+      /*$(e).find('input').focus();*/
+    }
+
+    function rescroll(e) {
+      $(window).scrollTo($(e), 200, {
+        offset: { left: 100, top: -200 },
+        queue: false
+      });
+    }
+
+    function reinit(e) {
+      reinitState(e);
+      rescroll(e);
+    }
+
+    function moveNext(e) {
+      $(e).parent().parent().next().click();
+    }
+
+    function movePrev(e) {
+      $(e).parent().parent().prev().click();
+    }
+  };
+
+  $(".upform").upform();
+  $.fn.upform = function() {
+    var $this = $(this);
+    var container = $this.find(".upform-main");
+
+    $(document).ready(function() {
+      $(container).find(".input-block").first().click();
+    });
+
+    $($this).find("form").submit(function() {
+      return false;
+    });
+
+    $(container)
+      .find(".input-block")
+      .not(".input-block input")
+      .on("click", function() {
+        rescroll(this);
+      });
+
+    $(container).find(".input-block input").keypress(function(e) {
+      if (e.which == 13) {
+        if ($(this).hasClass("required") && $(this).val() == "") {
+        } else moveNext(this);
+      }
+    });
+
+    $(container).find('.input-block input[type="radio"]').change(function(e) {
+      moveNext(this);
+    });
+
+    $(window).on("scroll", function() {
+      $(container).find(".input-block").each(function() {
+        var etop = $(this).offset().top;
+        var diff = etop - $(window).scrollTop();
+
+        if (diff > 100 && diff < 300) {
+          reinitState(this);
+        }
+      });
+    });
+
+    function reinitState(e) {
+      $(container).find(".input-block").removeClass("active");
+
+      $(container).find(".input-block input").each(function() {
+        $(this).blur();
+      });
+      $(e).addClass("active");
+      /*$(e).find('input').focus();*/
+    }
+
+    function rescroll(e) {
+      $(window).scrollTo($(e), 200, {
+        offset: { left: 100, top: -200 },
+        queue: false
+      });
+    }
+
+    function reinit(e) {
+      reinitState(e);
+      rescroll(e);
+    }
+
+    function moveNext(e) {
+      $(e).parent().parent().next().click();
+    }
+
+    function movePrev(e) {
+      $(e).parent().parent().prev().click();
+    }
+  };
+
+  $(".upform").upform();
+  </script>

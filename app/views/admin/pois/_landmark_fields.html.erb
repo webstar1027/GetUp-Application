@@ -1,0 +1,187 @@
+  <div class="nested-fields">
+  <% if !f.object.new_record? %>
+    <%= f.hidden_field :id %>
+  <% end %>
+  <h4 class="title">Cover Photo</h4>
+  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+    <div class="fileinput-new thumbnail">
+      <img src="../../assets/img/image_placeholder.jpg" alt="...">
+    </div>
+    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+    <div>
+      <span class="btn btn-rose btn-round btn-file">
+        <span class="fileinput-new">Select image</span>
+        <span class="fileinput-exists">Change</span>
+        <%= f.file_field :cover_photo %>
+      </span>
+      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+    </div>
+  </div>
+  <h4 class="title">Images</h4>
+  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+    <div class="fileinput-new thumbnail">
+      <img src="../../assets/img/image_placeholder.jpg" alt="...">
+    </div>
+    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+    <div>
+      <span class="btn btn-rose btn-round btn-file">
+        <span class="fileinput-new">Select image</span>
+        <span class="fileinput-exists">Change</span>
+        <%= f.file_field :images, multiple: true %>
+      </span>
+      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="landmarkName" class="bmd-label-floating">Name</label>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="landmarkDescription" class="bmd-label-floating">Description</label>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+  <%= f.hidden_field :lat, id: "landmark_lat" %>
+  <%= f.hidden_field :lng, id: "landmark_lng" %>
+  <% random = Random.rand(100) %>
+  <div id="map-dashboard-<%= random %>"></div>
+  <%= link_to_remove_association "<i class='material-icons'>close</i>".html_safe, f %>
+</div>
+
+  <script>
+    function initMap() {
+        
+        var lat = $('#poi_lat').val();
+        var lng = $('#poi_lng').val();
+        var myLatlng = new google.maps.LatLng(lat, lng);
+        var mapid = 'map-dashboard-' + <%= random %>;
+        
+        var mapOptions = {
+            zoom: 18,
+            center: myLatlng,
+            zoomControl: true,
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById(mapid),mapOptions);
+        var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+        
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          title:"Hello World!"
+        });
+        
+        $('#landmark_lat').val(lat);
+        $('#landmark_lng').val(lng);
+        
+        // To add the marker to the map, call setMap();
+        marker.setMap(map);
+        map.setCenter(myLatlng);
+
+
+        
+        google.maps.event.addListener(map, 'click', function(event) {
+          
+          var latlng = {lat: parseFloat(event.latLng.lat()), lng: parseFloat(event.latLng.lng())};
+          $('#landmark_lat').val(parseFloat(event.latLng.lat()));
+          $('#landmark_lng').val(parseFloat(event.latLng.lng()));
+          
+          geocoder.geocode({'location': latlng}, function(results, status) {
+                    if (status === 'OK') {
+                      if (results[0]) {
+                        map.setZoom(18);
+                        map.setCenter(results[0].geometry.location);
+
+                        
+                        var arrAddress = results[0].address_components;
+                        var itemRoute='';
+                        var itemLocality='';
+                        var itemCountry='';
+                        var itemPc='';
+                        var itemSnumber='';
+
+                        // iterate through address_component array
+                        $.each(arrAddress, function (i, address_component) {
+                            console.log('address_component:'+i);
+                            console.log(address_component.long_name);
+                            console.log(address_component.types[0])
+                            
+                            if (address_component.types[0] == "premise"){
+                                console.log(i+": route:"+address_component.long_name);
+                                itemRoute = address_component.long_name;
+                                $('#poi_address').val(itemRoute);
+                                $('#poi_address').parent().addClass('is-focused');
+                            }
+
+                            if (address_component.types[0] == "route"){
+                                console.log(i+": route:"+address_component.long_name);
+                                itemRoute = address_component.long_name;
+                                $('#poi_address').val(itemRoute);
+                                $('#poi_address').parent().addClass('is-focused');
+                            }
+
+                            if (address_component.types[0] == "locality"){
+                                console.log("town:"+address_component.long_name);
+                                itemLocality = address_component.long_name;
+                                $('#poi_city').val(itemLocality);
+                                $('#poi_city').parent().addClass('is-focused');
+                            }
+
+                            if (address_component.types[0] == "country"){ 
+                                console.log("country:"+address_component.long_name); 
+                                itemCountry = address_component.long_name;
+                                $("#poi_country_id").filter(function() {
+                                    //may want to use $.trim in here
+                                    return $(this).text() == itemCountry; 
+                                }).prop('selected', true);
+                            }
+
+                            if (address_component.types[0] == "postal_code_prefix"){ 
+                                console.log("pc:"+address_component.long_name);  
+                                itemPc = address_component.long_name;
+                            }
+
+                            if (address_component.types[0] == "street_number"){ 
+                                console.log("street_number:"+address_component.long_name);  
+                                itemSnumber = address_component.long_name;
+                            }
+                            //return false; // break the loop   
+                        });
+                        
+                        window.alert(results[0].formatted_address);
+                        if (marker) {
+                                //if marker already was created change positon
+                                marker.setPosition(results[0].geometry.location);
+                            } else {
+                                //create a marker
+                                marker = new google.maps.Marker({
+                                    position: results[0].geometry.location,
+                                    map: map,
+                                    draggable: true
+                                });
+                                
+                            }
+                      } else {
+                        window.alert('No results found');
+                      }
+                    } else {
+                      window.alert('Geocoder failed due to: ' + status);
+                    }
+                  });
+
+              
+         
+        });
+    }
+    
+    function placeMarker(location) {
+      var marker = new google.maps.Marker({
+          position: location, 
+          map: map
+      });
+      console.log(location);
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt6EKYip9qRaxIYB6cKQTXQYOnW_5Xs_A&callback=initMap"
+  async defer></script>
+  

@@ -1,0 +1,169 @@
+<div class="profile-page sidebar-collapse">
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/city-profile.jpg');"></div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="card-avatar">
+                <% if @business.avatar.attached? %>
+                  <div class="cover-photo">
+                    <%= image_tag(@business.avatar, class: "img", style: "width: 100px; height:100px; border-radius:50%") %>
+                  </div>
+                  <% else %>
+                  <%= image_tag("https://via.placeholder.com/100x100", class: "img") %>
+                <% end %>
+              </div>
+							<br/>
+              <div class="name">
+                <h3 class="title"><%= @business.business_name %></h3>
+                <h6>
+									<% if @business.type_of_business == "Eateries/Rrestaurant" %>
+									<%= @business.type_of_business %> | <%= @business.halal == true ? "halal" : "non halal"%>
+									<% elsif @business.type_of_business = "Others "%>
+										<%= @business.other_business %>
+									<% else %>
+										<%= @business.type_of_business %>
+									<% end %>
+								
+								</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="description text-left">
+					<div class="row">
+						<div class="col-md-1">
+							<i class="fa fa-info-circle fa-lg" aria-hidden="true" style="color:#69E5B3;"></i>
+						</div>
+						<div class="col-md-11">
+							<%= @business.description || "N/A"%>
+						</div>
+				</div>
+					<p></p>
+					<br/>
+						<div class="row">
+							<div class="col-md-1">
+								<i class="fa fa-clock-o fa-lg" aria-hidden="true" style="color:#69E5B3;"></i>
+							</div>
+							<div class="col-md-11">
+								<%= @business.operating_hours || "N/A"%>
+							</div>
+					</div>
+					<p></p>
+					<br/>
+						<div class="row">
+							<div class="col-md-1">
+								<i class="fa fa-map-marker fa-lg" aria-hidden="true" style="color:#69E5B3;"></i>
+							</div>
+							<div class="col-md-11">
+								<%= simple_format(@business.address) || "N/A"%>
+							</div>
+					</div>
+					<p></p>
+					<br/>
+					
+						<div class="row">
+							<div class="col-md-1">
+								<i class="fa fa-mobile fa-lg" aria-hidden="true" style="color:#69E5B3;"></i>
+							</div>
+							<div class="col-md-11">
+								<%= @business.contact_number || "N/A"%>
+							</div>
+					</div>
+					<p></p>
+					<br/>
+					
+						<div class="row">
+							<div class="col-md-1">
+								<i class="fa fa-envelope" aria-hidden="true" style="color:#69E5B3;"></i>
+							</div>
+							<div class="col-md-11">
+								<%= @business.contact_email || "N/A"%>
+							</div>
+					</div>
+					
+        </div>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#studio" role="tab" data-toggle="tab">
+                    <i class="material-icons">local_offer</i> Deals
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#works" role="tab" data-toggle="tab">
+                    <i class="material-icons">card_membership</i> Quests
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content tab-space">
+          <div class="tab-pane active" id="studio">
+		        <div class="row">
+		          <% @deals.each do |deal| %>
+		          <div class="col-md-6">
+		            <div class="card card-plain quest-section">
+		              <div class="card-header card-header-image">
+		                <% if deal.present? && deal.cover_photo.attached? %>
+		                  <%= image_tag deal.cover_photo %>
+		                <% else %>
+		                  <img class="img" src="../assets/img/card-2.jpg">
+		                <% end %>
+		              </div>
+		              <div class="card-body ">
+		                <h3 class="card-title"><%= deal.name || "NA" %></h3>
+		                <h6 class="card-deal"><%= deal.try(:name).present? ? "#{deal.name} at #{deal.user.business.business_name}" : "NA" %></h6>
+										<h6><%= deal.description%></h6>
+		                <h6 class="card-coupon"><i class='material-icons material-quest-icons'>loyalty</i><%= coupons_left(deal) %></h6>
+		                <h6 class="card-deal-expire"><i class='material-icons material-quest-icons'>access_time</i><%= "Deal expires in #{distance_of_time_in_words(deal.expiry_date, Date.current)}".html_safe %></h6>
+                  
+		              </div>
+		            </div>
+		          </div>
+		          <% end %>
+          
+		        </div>
+          </div>
+          <div class="tab-pane" id="works">
+		        <div class="row">
+		          <% @quests.each do |quest| %>
+		          <div class="col-md-6">
+		            <div class="card card-plain quest-section">
+		              <div class="card-header card-header-image">
+		                <% :ruby
+		                     deal = quest.deal
+		                %>
+		                <% if deal.present? && deal.cover_photo.attached? %>
+		                  <%= image_tag deal.cover_photo %>
+		                <% else %>
+		                  <img class="img" src="../assets/img/card-2.jpg">
+		                <% end %>
+		              </div>
+		              <div class="card-body ">
+		                <h3 class="card-title"><%= quest.title || "NA" %></h3>
+		                <h6 class="card-deal"><%= deal.try(:name).present? ? "#{deal.name} at #{deal.user.business.business_name}" : "NA" %></h6>
+		                <h6 class="card-location"><i class='material-icons material-quest-icons' >explore</i><%= quest.get_locations_name || "NA" %></h6>
+		                <h6 class="card-coupon"><i class='material-icons material-quest-icons'>loyalty</i><%= coupons_left(deal) %></h6>
+		                <h6 class="card-deal-expire"><i class='material-icons material-quest-icons'>access_time</i><%= deal_expires_in_words(deal) %></h6>
+                  
+		                <div class="action">
+		                  <%= link_to "INFO", public_quest_path(quest), class: "btn btn-sm pull-right btn-primary" %>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          <% end %>
+          
+		        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

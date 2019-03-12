@@ -1,0 +1,134 @@
+<% content_for :breadcrumb do %>
+   <%= @business_owner.username %>
+<% end %>
+
+<style>
+  .cover-photo img{ width: 500px; }
+
+  @media screen and (max-width:767px) {
+    .cover-photo img{ width: 100%; }
+  }
+</style>
+
+<div class="row">
+  <% if notice %>
+  <div class="col-md-12">
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">account_box</i>
+        </div>
+        <h4 class="card-title"><%= @business_owner.username %></h4>
+      </div>
+      <div class="card-body">
+        <% if @business_owner.avatar.attached? %>
+          <div class="cover-photo">
+            <%= image_tag(@business_owner.avatar, class: "img") %>
+          </div>
+        <% else %>
+          <%= image_tag("https://via.placeholder.com/300x200", class: "img") %>
+        <% end %>
+        
+        <% if @business_owner.images.attached? %>
+          <!--Carousel Wrapper-->
+            <div id="carousel-with-lb" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+              <!--Controls-->
+              <div class="controls-top">
+                <a class="btn-floating btn-secondary" href="#carousel-with-lb" data-slide="prev"><</i></a>
+                <a class="btn-floating btn-secondary" href="#carousel-with-lb" data-slide="next">></i></a>
+              </div>
+              <!--/.Controls-->
+
+              <!--Slides and lightbox-->
+
+              <div class="carousel-inner mdb-lightbox" role="listbox">
+                <div id="mdb-lightbox-ui"></div>
+                <!--First slide-->
+                  <% @business_owner.images.each_with_index do |avatar,index| %>
+                    <div class="carousel-item text-center <%= 'active' if index == 0 %>">
+                    <figure class="d-md-inline-block">
+                      <%= image_tag(avatar, class: "img", style: "height: 500px") %>
+                    </figure>
+                  </div>
+                  <% end %>
+
+                </div>
+                <!--/.First slide-->
+              </div>
+              <!--/.Slides-->
+            </div>
+          <!--/.Carousel Wrapper-->
+        <% end %>
+        
+        <h3>Details</h3>
+				
+      	<h4>Email:</h4>
+      	<p><%= @business_owner.email %></p>
+				
+      	<h4>Joined Date:</h4>
+      	<p><%= @business_owner.created_at %></p>
+				
+      	<h4>Last Login Date:</h4>
+      	<p><%= @business_owner.last_sign_in_at.present?  ? @business_owner.last_sign_in_at : "N/A" %></p>
+				
+      	<h4>User Name:</h4>
+      	<p><%= @business_owner.username %></p>
+				
+      	<h4>Business Name:</h4>
+      	<p><%= @business_owner.business.present? ? @business_owner.business.business_name : "N/A" %></p>
+      	<h4>Description:</h4>
+      	<p><%= @business_owner.business.present? ? simple_format(@business_owner.business.description) : "N/A" %></p>
+				
+      	<h4>Contact Email:</h4>
+      	<p><%= @business_owner.business.present? ? @business_owner.business.contact_email : "N/A" %></p>
+				
+				
+      	<h4>Total Deals:</h4>
+      	<p><%= @business_owner.deals.where(super_deal: nil).count %></p>
+				
+      	<h4>Total Quests:</h4>
+      	<p><%= @business_owner.deals.where(super_deal: true).count %></p>
+				
+      	<h4>Business Type:</h4>
+      	<p>
+					<% if @business_owner.business.present? %>
+						<% if @business_owner.business.type_of_business == "Eateries/Rrestaurant" %>
+						<%= @business_owner.business.type_of_business %>
+						<% elsif @business_owner.business.type_of_business = "Others "%>
+							<%= @business_owner.business.other_business %>
+						<% else %>
+							<%= @business_owner.business.type_of_business %>
+						<% end %>
+					<% else %>
+						N/A
+					<% end %>
+      	</p>
+				
+				<% if @business_owner.business.present? && @business_owner.business.type_of_business == "Eateries/Rrestaurant" %>
+	      	<h4>Halal:</h4>
+	      	<p><%= @business_owner.business.halal == true ? "Yes" : "No" %></p>
+				<% end %>
+				
+      	<h4>Business Address:</h4>
+      	<p><%= @business_owner.business.present? ? @business_owner.business.address : "N/A" %></p>
+				
+      	<h4>Operating Hours:</h4>
+      	<p><%= @business_owner.business.present? ? simple_format(@business_owner.business.operating_hours) : "N/A" %></p>
+				
+      	<h4>Contact Number:</h4>
+      	<p><%= @business_owner.business.present? ? @business_owner.business.contact_number : "N/A" %></p>
+				
+				
+      </div>
+    </div>
+  </div>
+</div>
+
+          

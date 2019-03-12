@@ -1,0 +1,57 @@
+<% content_for :breadcrumb do %>
+   <%= @user.username %>
+<% end %>
+
+<style>
+  .cover-photo img{ width: 500px; }
+
+  @media screen and (max-width:767px) {
+    .cover-photo img{ width: 100%; }
+  }
+</style>
+
+<div class="row">
+  <% if notice %>
+  <div class="col-md-12">
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">account_box</i>
+        </div>
+        <h4 class="card-title"><%= @user.username %></h4>
+      </div>
+      <div class="card-body">
+        <% if @user.avatar.attached? %>
+          <% url = amazon_image_url(@user) %>
+          <div class="cover-photo">
+            <%= image_tag(@user.avatar, class: "img", style: "width: 100px;height:100px;") %>
+          </div>
+        <% else %>
+          <%= image_tag("https://via.placeholder.com/100x100") %>
+        <% end %>
+        
+        <h3>Details</h3>
+				
+      	<h4>Email:</h4>
+      	<p><%= @user.email %></p>
+				
+      	<h4>Joined Date:</h4>
+      	<p><%= @user.created_at %></p>
+				
+      	<h4>Last Login Date:</h4>
+      	<p><%= @user.last_sign_in_at.present?  ? @user.last_sign_in_at : "N/A" %></p>
+				
+      	<h4>User Name:</h4>
+      	<p><%= @user.username %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+          

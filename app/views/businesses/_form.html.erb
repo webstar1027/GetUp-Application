@@ -1,0 +1,221 @@
+<p></p>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">business</i>
+            </div>
+            <h4 class="card-title">Business Profile -
+              <small class="category">Complete your profile</small>
+            </h4>
+          </div>
+          <div class="card-body">
+				    <%= form_with(model: business, local: true) do |f| %>
+				      <% if business.errors.any? %>
+				        <div id="error_explanation">
+				          <h2><%= pluralize(business.errors.count, "error") %> prohibited this Business from being saved:</h2>
+				          <ul>
+				            <% business.errors.full_messages.each do |message| %>
+				              <li><%= message %></li>
+				            <% end %>
+				          </ul>
+				        </div>
+				      <% end %>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Business Name</label>
+                    <%= f.text_field :business_name, required: true, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Contact Number</label>
+                    <%= f.text_field :contact_number, required: true, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Contact Email</label>
+                    <%= f.email_field :contact_email, required: true, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+										<div>
+	                    <label class="bmd-label-floating">Person in Charge Name</label>
+	                    <%= f.text_field :person_charge_name, required: true, class: 'form-control' %>
+	                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Person in Charge Contact Number</label>
+                    <%= f.text_field :person_contact_number, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+										  <%= f.select :type_of_business, options_for_select([["Airlines", "Airlines"], ["Eateries/Rrestaurant", "Eateries/Rrestaurant"], ["Retailers", "Retailers"], ["Online Retailers", "Online Retailers"], ["Hotels", "Hotels"], ["Others", "Others"]], @business.type_of_business), {:prompt => "Type of Business"}, { class: "form-control", onchange: "check_business();"} %>
+                  </div>
+                </div>
+								
+                <div class="col-md-6 other_business">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">For other business, please Specify</label>
+                    <%= f.text_field :other_business, class: 'form-control input-lg'%>
+                  </div>
+                </div>
+              </div>	
+							
+              <div class="row eateries_business">
+								<div class="col-md-8">
+		              <div class="togglebutton">
+		                <label>
+		                  <%= f.check_box :vegan %>
+		                  Does the eateries/restaurant served vegetarian food?
+											&nbsp;
+		                  <span class="toggle"></span>
+		                </label>
+		              </div>
+									<p></p>
+								</div>
+								
+								<div class="col-md-4">
+		              <div class="togglebutton">
+		                <label>
+		                  <%= f.check_box :halal %>
+		                 halal&nbsp;
+		                  <span class="toggle"></span>
+		                </label>
+		              </div>
+								</div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+										<div>
+	                    <label class="bmd-label-floating">Website/Social Link</label>
+	                    <%= f.text_field :social_link, class: 'form-control' %>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+										<div>
+	                    <label class="bmd-label-floating">Address</label>
+	                    <%= f.text_area :address, class: 'form-control' %>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">City</label>
+                    <%= f.text_field :city, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Post Code</label>
+                    <%= f.text_field :post_code, class: 'form-control input-lg'%>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <%= f.select :country_id, options_for_select(Country.all.map{|coun| [coun.name, coun.id]}, current_user.country_id), {include_blank: "Select Country"}, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+							
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Operating hours</label>
+                    <%= f.text_area :operating_hours, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Introduction (Tell us about your business)</label>
+                    <%= f.text_area :description, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+							<div class="row">
+								<div class="col-md-12">
+		              <div class="togglebutton">
+		                <label>
+		                  <%= f.check_box :outlet %>
+		                 More than one outlet?
+		                  <span class="toggle"></span>
+		                </label>
+		              </div>
+								</div>
+							</div>
+              <%= f.submit "Update Profile", class: "btn btn-rose pull-right" %>
+              <%= f.submit "Preview", class: "btn btn-rose pull-right", style: "margin-right:10px;" %>
+														
+              <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+				<div class="card card-profile fileinput fileinput-new text-center" data-provides="fileinput">
+				<div class="card-avatar fileinput-new thumbnail">
+				  <% if @business.avatar.try(:attached?) %>
+            <div class="cover-photo fileinput-new thumbnail" style="margin-bottom:0px !important;">
+              <%= image_tag(@business.avatar, class: "img", style: "width:100px;height:100px;") %>
+            </div>
+				  <% else %>
+				    <%= image_tag("https://via.placeholder.com/100x100", class: "img") %>
+				  <% end %>
+				</div>
+				<div class="card-avatar fileinput-preview fileinput-exists thumbnail" style= "width:100px;height:100px;"></div>
+				<br/>
+				<br/>
+				<div>
+				  <span class="btn btn-rose btn-round btn-file">
+				    <span class="fileinput-new">Select image</span>
+				    <span class="fileinput-exists">Change</span>
+				    <%= f.file_field :avatar, style: "width: 100px; height:100px"%>
+				  </span>
+				</div>
+				<br/>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+	var value = $("#business_type_of_business").val();
+	if(value == 'Eateries/Rrestaurant'){
+		$('.eateries_business').show();
+		
+	}else{
+		$('.eateries_business').hide();
+	}
+  function check_business(){
+		var value = $("#business_type_of_business").val();
+		if(value == 'Eateries/Rrestaurant'){
+			$('.eateries_business').show();
+			
+		}else{
+			$('.eateries_business').hide();
+		}
+  };
+</script>

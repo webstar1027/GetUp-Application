@@ -1,0 +1,95 @@
+<%= form_with(model: landmark, local: true) do |form| %>
+  <% if landmark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(landmark.errors.count, "error") %> prohibited this landmark from being saved:</h2>
+
+      <ul>
+      <% landmark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.hidden_field :lat %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :lng %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  
+  <div id="map-dashboard"></div>
+      <script>
+        var map;
+        
+
+        function initMap() {
+            
+            var myLatlng = new google.maps.LatLng(gon.lat, gon.lng);
+            
+            var mapOptions = {
+                zoom: 12,
+                center: myLatlng,
+                disableDefaultUI: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById('map-dashboard'),mapOptions);
+            
+            var marker = new google.maps.Marker({
+              position: myLatlng,
+              title:"Hello World!"
+            });
+            
+            // To add the marker to the map, call setMap();
+            marker.setMap(map);
+
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+                initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                map.setCenter(initialLocation);
+              });
+            }
+            
+            google.maps.event.addListener(map, 'click', function(event) {
+              //call function to create marker
+              console.log(event.latLng.lat());
+              console.log(event.latLng.lng());
+              $("#landmark_lat").val(event.latLng.lat());
+              $("#landmark_lng").val(event.latLng.lng());
+              //delete the old marker
+              if (marker) { marker.setMap(null); }
+              
+              marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map
+              });
+            });
+        }
+        
+        function placeMarker(location) {
+          var marker = new google.maps.Marker({
+              position: location, 
+              map: map
+          });
+          console.log(location);
+        }
+      </script>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt6EKYip9qRaxIYB6cKQTXQYOnW_5Xs_A&callback=initMap"
+        async defer></script>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

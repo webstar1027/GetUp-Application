@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @landmark.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @landmark.lng %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @landmark.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @landmark.description %>
+</p>
+
+<%= link_to 'Edit', edit_landmark_path(@landmark) %> |
+<%= link_to 'Back', landmarks_path %>

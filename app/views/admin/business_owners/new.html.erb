@@ -1,0 +1,16 @@
+<% content_for :breadcrumb do %>
+  Add Business Owner
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-rose card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">account_box</i>
+        </div>
+        <h4 class="card-title">Add Business Owner</h4>
+      </div>
+      <%= render 'form', business_owner: @business_owner, url: admin_business_owners_path %>
+    </div>
+  </div>
+</div>

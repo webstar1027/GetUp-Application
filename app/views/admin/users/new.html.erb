@@ -1,0 +1,16 @@
+<% content_for :breadcrumb do %>
+  Add User
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header card-header-rose card-header-text">
+        <div class="card-icon">
+          <i class="material-icons">account_box</i>
+        </div>
+        <h4 class="card-title">Add User</h4>
+      </div>
+      <%= render 'form', user: @user %>
+    </div>
+  </div>
+</div>

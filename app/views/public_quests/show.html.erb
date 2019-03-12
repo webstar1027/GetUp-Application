@@ -1,0 +1,84 @@
+<div class="product-page">  
+  <div class="page-header product-page-header header-filter" data-parallax="true" filter-color="rose" style="background-image: url(&quot;../assets/img/bg6.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
+    
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="main main-raised main-product">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <div class="tab-content">
+              <div class="tab-pane active" id="product-page1">
+                <% if @deal.cover_photo.attached? %>
+                  <%= image_tag @deal.cover_photo %>
+                <% else %>
+                  <%= image_tag "/assets/img/card-2.jpg" %>
+                <% end %>
+              </div>
+              
+            </div>
+            
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <h2 class="title"> <%= @quest.title %> </h2>
+            <h3 class="main-price"><%= @deal.present? ? @deal.name || "NA" : "NA" %></h3>
+            <h4 class="main-price"><i class='material-icons material-quest-icons'>access_time</i><%= deal_expires_in_words(@deal) %></h4>
+            
+            <div id="accordion" role="tablist">
+              <div class="card card-collapse">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Locations
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <p><%= @quest.get_locations_name || "NA" %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-collapse">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      No of coupons
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body">
+                    <%= coupons_left(@deal) %>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-collapse">
+                <div class="card-header" role="tab" id="headingThree">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Instructions
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body">
+                    <p><%= @quest.instructions.present? ? @quest.instructions : "N/A" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row pull-right" style="margin-top: 2rem;">
+              <%= link_to "Back", public_quests_path, class: "btn btn-rose btn-round" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

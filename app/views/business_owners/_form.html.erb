@@ -1,0 +1,139 @@
+<style>
+.hide{ display: none; }
+</style>
+<%= form_with(model: business_owner, local: true, url: url) do |form| %>
+  <% if business_owner.errors.any? %>
+  <% business_owner.errors.full_messages.each do |message| %>
+  <div class="col-md-12" style="margin-top: 20px;">
+    <div class="alert alert-danger">
+      <%= message %>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+      
+<div class="card-body ">
+  <div>
+      <h4 class="title">Cover Image</h4>
+      <div class="fileinput fileinput-new mb-30" data-provides="fileinput" style="width:480px">
+        <div class="fileinput-new thumbnail" style="max-width: 480px;">
+          <img src="../../assets/img/image_placeholder.jpg" alt="...">
+        </div>
+        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+        <div>
+          <span class="btn btn-sm btn-rose btn-round btn-file">
+            <span class="fileinput-new">Select image</span>
+            <span class="fileinput-exists">Change</span>
+            <%= form.file_field :avatar %>
+          </span>
+          <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+        </div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="bmd-label-floating">Username</label>
+        <%= form.text_field :username, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="exampleEmail" class="bmd-label-floating">Email</label>
+        <%= form.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="exampleEmail" class="bmd-label-floating">Password</label>
+        <%= form.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="exampleEmail" class="bmd-label-floating">Address</label>
+        <%= form.text_field :address, class: "form-control", value: business_owner.address %>
+      </div>
+      <div class="form-group">
+        <label for="exampleEmail" class="bmd-label-floating">City</label>
+        <%= form.text_field :city, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= form.select :country_id, options_for_select(Country.pluck(:name,:id),business_owner.country_id), {:prompt => "Select Country"}, {class: "form-control"}  %>
+      </div>
+      <p style="margin-top:40px;"> Is this business eligible for quest?</p>
+      <div class="checkbox-radios">
+        <div class="form-check">
+          <label class="form-check-label">
+            <%= form.radio_button :quest_option, true, class: "form-check-input", name: "user[quest_option]"  %>
+            Yes
+            <span class="circle">
+              <span class="check"></span>
+            </span>
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <%= form.radio_button :quest_option, false, class: "form-check-input", name: "user[quest_option]" %> No
+            <span class="circle">
+              <span class="check"></span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div id="map-dashboard" class="<%= 'hide' unless business_owner.country_id.present? %>"></div>
+      
+    </div>
+
+      <div class="card-footer ">
+        <%= form.submit "Submit", class: "btn btn-primary" %>
+        <%= yield :button %>
+      </div>
+  <% end %>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt6EKYip9qRaxIYB6cKQTXQYOnW_5Xs_A&callback=initMap" async defer></script>
+  <script>
+
+  $(document).on('change', '#user_country_id', function() {
+    updatemap();    
+  });
+  $(document).on('change', '#user_city', function() {
+    updatemap();    
+  });
+  $(document).on('change', '#user_address', function() {
+    updatemap();    
+  });
+
+  function updatemap(){
+    var country = $("#user_country_id option:selected").text();
+    var city = $("#user_city").val();
+    var address = $("#user_address").val();
+    var complete_address = address + city + country;
+    
+    var geocoder = new google.maps.Geocoder();
+    var address = complete_address;
+    var latitude;
+    var longitude;
+
+    $("#map-dashboard").show();
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        latitude = results[0].geometry.location.lat();
+        longitude = results[0].geometry.location.lng();
+        
+        var myLatLng = {lat: latitude, lng: longitude};
+        $("#coordinate").val(latitude + ", " + longitude);
+        var map = new google.maps.Map(document.getElementById('map-dashboard'), {
+          zoom: 12,
+          center: myLatLng,
+          disableDefaultUI: true,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        }); 
+      } 
+
+    });
+  }
+</script>
+  
+  

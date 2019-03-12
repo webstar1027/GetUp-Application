@@ -1,0 +1,3 @@
+<%= form_with(model: quest, local: true, url: quest.id.present? ? admin_quest_path(quest) : admin_quests_path) do |form| %>
+  <%= render "admin/quests/fields", form: form, quest: quest %>
+<% end %>
